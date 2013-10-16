@@ -11,7 +11,7 @@ import java.util.Set;
  * User: roberto
  * Date: 10/16/13
  * Time: 9:06 PM
- * Pattern: Signleton
+ * Pattern: Singleton
  * 
  * This class contains a dictionary with english words.
  * Another class can call the checkWord() method to check if a word is valid.

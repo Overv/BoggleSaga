@@ -12,6 +12,9 @@ import java.util.Set;
  * Date: 10/16/13
  * Time: 9:06 PM
  * Pattern: Signleton
+ * 
+ * This class contains a dictionary with english words.
+ * Another class can call the checkWord() method to check if a word is valid.
  */
 public class Dictionary {
     
@@ -38,6 +41,17 @@ public class Dictionary {
         }
     }
     
+    // Check if a word is valid
+    public boolean checkWord(String word) {
+        word = word.toLowerCase();
+        if(word.length() < 3) {
+            return false;
+        } else
+            return wordList.contains(word);
+    }
+    
+    
+    // Fills the HashSet from the textfile
     private boolean fillWordList() {
         File f = new File(pathToDictionaryFile);
         BufferedReader br = null;
@@ -63,6 +77,7 @@ public class Dictionary {
         return true;
     }
     
+    // Creates a string representation of the wordlist
     public String toString() {
         if(wordList != null) {
             return wordList.toString();

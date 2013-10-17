@@ -38,12 +38,12 @@ as a result of unit testing
 Road map
 --------
 
-The first sprint will end on **Sunday, 15 October** and the following features
+The first sprint will end on **Sunday, 20 October** and the following features
 will be implemented by the specified members of the team.
 
 ### Alexander
 
-**View** with: 
+**View** with:
 
 * Board along with dragging over dice for word selection
 * Text based timer

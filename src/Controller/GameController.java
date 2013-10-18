@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.IGame;
+import Model.IGameModel;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,9 +10,9 @@ import Model.IGame;
  */
 public class GameController implements IGameController { //implements TimeObserver oid
 
-    IGame   gameModel;
+    IGameModel gameModel;
 
-    public GameController(IGame gameModel) { // add view
+    public GameController(IGameModel gameModel) { // add view
         this.gameModel = gameModel;
     }
 

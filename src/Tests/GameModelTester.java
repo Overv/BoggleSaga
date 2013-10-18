@@ -1,5 +1,7 @@
 package Tests;
 
+import Model.GameModel;
+
 /**
  * Created with IntelliJ IDEA.
  * User: roberto
@@ -8,4 +10,9 @@ package Tests;
  */
 public class GameModelTester {
     
+    public static void main(String args[]) {
+        GameModel gm = new GameModel();
+        gm.startGame(4, 4);
+        System.out.print(gm.getGame().getBoard().toString());
+    }
 }

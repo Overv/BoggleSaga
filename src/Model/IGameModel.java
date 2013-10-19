@@ -14,8 +14,10 @@ public interface IGameModel {
     abstract void removeObserver(Observable observer);
     abstract void notifyObservers();
     
-    abstract void startGame(int boardSizeX, int boardSizeY); // Use to start a newly created game
+    abstract void startGame(); // Use to start a newly created game
     abstract Game getGame(); // Gets the game instance in the current game
+    abstract Time getTime();
+    abstract void newGame(int boardSizeX, int boardSizeY);
     abstract void restartGame(); // Restart a currently active game
     abstract int getTimeLeft(); // Get time left on the timer in seconds
     abstract void pauseTime(); // Stop the timer

@@ -34,8 +34,13 @@ public class GameModel implements IGameModel {
     }
 
     @Override
-    public void startGame(int boardSizeX, int boardSizeY) {
-        this.game = new Game(new Board(boardSizeX, boardSizeY));
+    public void startGame() {
+        this.game.start();
+    }
+    
+    @Override
+    public void newGame(int boardSizeX, int boardSizeY) {
+        this.game = new Game(boardSizeX, boardSizeY);
     }
 
     @Override
@@ -48,6 +53,7 @@ public class GameModel implements IGameModel {
         game.restart();
     }
     
+    @Override
     public Time getTime() {
         return this.game.getTime();
     }

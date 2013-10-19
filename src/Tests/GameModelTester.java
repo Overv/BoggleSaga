@@ -12,7 +12,8 @@ public class GameModelTester {
     
     public static void main(String args[]) {
         GameModel gm = new GameModel();
-        gm.startGame(4, 4);
+        gm.newGame(4, 4);
+        gm.startGame();
         System.out.print(gm.getGame().getBoard().toString());
     }
 }

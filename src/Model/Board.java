@@ -9,20 +9,15 @@ import java.util.Random;
  * Date: 10/18/13
  * Time: 10:00 PM
  */
-public class Board {
+public abstract class Board {
 
     Random rand;
     
-    private int boardSizeX;
-    private int boardSizeY;
-    private int boardSize;
-    private char[][] board;
+    protected int boardSizeX;
+    protected int boardSizeY;
+    protected int boardSize;
+    protected char[][] board;
     
-    public static String[] dice4x4 = {"ARELSC", "TABIYL","EDNSWO","BIOFXR",
-                                      "MCDPAE","IHFYEE","KTDNUO","MOQAJB",
-                                      "ESLUPT","INVTGE","ZNDVAE","UKGELY",
-                                      "OCATAI","ULGWIR","SPHEIN","MSHARO"};
-
     public Board(int boardSizeX, int boardSizeY) {
         this.rand = new Random();
         
@@ -33,25 +28,10 @@ public class Board {
         generateBoard();
     }
     
-    private void generateBoard() {
-        if(boardSize == 16) {
-            // shuffle dice
-            String[] shuffled4x4 = shuffleArray(dice4x4); 
-            // fill the board with the generated letters
-            int counter = 0;
-            for(int i=0; i<boardSizeX; i++) {
-                for(int j=0; j<boardSizeY; j++) {
-                    board[i][j] = shuffled4x4[counter].charAt(rand.nextInt(5)); // Convert the String array to a char array
-                    counter ++;
-                }
-            }
-        } else {
-            System.out.println("This board size is not supported");
-            return;
-        }
-    }
+    // Varies for each board
+    public abstract void generateBoard();
 
-    private static String[] shuffleArray(String[] arIn) {
+    protected static String[] shuffleArray(String[] arIn) {
         String[] ar = arIn;
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {

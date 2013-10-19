@@ -1,6 +1,6 @@
 # Ignore generated files
 out
 workspace.xml
-.idea/
+.idea/*
 *.iml
 *.iws

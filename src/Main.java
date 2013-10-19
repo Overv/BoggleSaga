@@ -11,12 +11,19 @@ public class Main {
         view.setTimeLeft(0);
 
         view.setDices(new char[][] {
-            {'R', 'H', 'R', 'E'},
-            {'Y', 'P', 'C', 'S'},
-            {'W', 'N', 'S', 'N'},
-            {'T', 'E', 'G', 'O'}
+            {'r', 'y', 'w', 't'},
+            {'h', 'p', 'n', 'e'},
+            {'r', 'c', 's', 'g'},
+            {'e', 's', 'n', 'o'}
         });
 
         view.setWordsGuessed(new String[] {"wench", "once"});
+
+        view.setOnWordListener(new GameFrame.OnWordListener() {
+            @Override
+            public void onWord(String word) {
+                System.out.println("Potential word selected: " + word);
+            }
+        });
     }
 }

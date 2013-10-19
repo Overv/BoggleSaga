@@ -1,14 +1,12 @@
 package View;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,7 +18,14 @@ public class GameFrame extends JFrame {
     private JLabel timeLabel;
     private DefaultListModel<String> wordListModel;
     private JList<String> wordList;
-    private JButton[] diceButton = new JButton[16];
+
+    private JButton[][] diceButtons = new JButton[4][4];
+    private char[][] diceLetters = new char[4][4];
+
+    private boolean draggingWord = false;
+    private ArrayList<DiceCoord> diceDragged;
+
+    private OnWordListener onWordListener;
 
     public GameFrame() {
         // Use native look and feel (if this fails, we have bigger problems)
@@ -42,7 +47,7 @@ public class GameFrame extends JFrame {
         setVisible(true);
     }
 
-    public void createLayout() {
+    private void createLayout() {
         // Create label displaying time left
         JLabel timeCaptionLabel = new JLabel("Time left");
         timeCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -81,7 +86,7 @@ public class GameFrame extends JFrame {
 
         JPanel wordListContainer = new JPanel();
         wordListContainer.setLayout(new BoxLayout(wordListContainer, BoxLayout.PAGE_AXIS));
-        wordListContainer.setBorder(new EmptyBorder(10, 10, 10, 10));
+        wordListContainer.setBorder(new EmptyBorder(10, 20, 10, 10));
 
         wordListContainer.add(wordCaptionLabel);
         wordListContainer.add(wordListScroller);
@@ -89,17 +94,107 @@ public class GameFrame extends JFrame {
         add(wordListContainer, BorderLayout.LINE_END);
 
         // Add grid with 4x4 dices
+        GridLayout gridLayout = new GridLayout(4, 4);
+        gridLayout.setHgap(30);
+        gridLayout.setVgap(30);
+
         JPanel diceGridContainer = new JPanel();
-        diceGridContainer.setLayout(new GridLayout(4, 4));
+        diceGridContainer.setLayout(gridLayout);
         diceGridContainer.setBorder(new EmptyBorder(10, 0, 10, 0));
 
-        for (int i = 0; i < 16; i++) {
-            diceButton[i] = new JButton();
-            diceButton[i].setFont(new Font(diceButton[i].getFont().getFontName(), Font.PLAIN, 60));
-            diceGridContainer.add(diceButton[i]);
+        // Create button for each dice
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                final JButton button = diceButtons[x][y] = new JButton();
+                button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 60));
+                button.addMouseListener(createDiceListener(button, x, y));
+                diceGridContainer.add(button);
+            }
         }
 
         add(diceGridContainer, BorderLayout.CENTER);
+    }
+
+    private MouseListener createDiceListener(final JButton button, final int x, final int y) {
+        return new MouseListener() {
+            // Unused
+            public void mouseClicked(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // Reset selection
+                diceDragged = new ArrayList<DiceCoord>();
+                draggingWord = true;
+
+                diceDragged.add(new DiceCoord(x, y));
+                button.setForeground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                draggingWord = false;
+
+                // Reset colors of dices
+                for (DiceCoord coord : diceDragged) {
+                    diceButtons[coord.x][coord.y].setForeground(Color.BLACK);
+                }
+
+                // Check if the selection followed the rules of the game
+                if (!checkSelection(diceDragged)) {
+                    return;
+                }
+
+                // If a listener has been registered, tell it about the selected potential word
+                if (onWordListener != null) {
+                    String word = wordFromDice(diceDragged);
+                    onWordListener.onWord(word);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if (draggingWord) {
+                    diceDragged.add(new DiceCoord(x, y));
+                    button.setForeground(Color.GREEN);
+                }
+            }
+        };
+    }
+
+    private boolean checkSelection(ArrayList<DiceCoord> dice) {
+        // Check if any dice were selected multiple times
+        if (new HashSet<DiceCoord>(dice).size() != dice.size()) {
+            return false;
+        }
+
+        // Check if subsequent dice are neighbours
+        DiceCoord lastDie = dice.get(0);
+
+        for (int i = 1; i < dice.size(); i++) {
+            if (!isNeighbour(dice.get(i), lastDie)) {
+                return false;
+            }
+            
+            lastDie = dice.get(i);
+        }
+
+        return true;
+    }
+
+    private boolean isNeighbour(DiceCoord a, DiceCoord b) {
+        double dist = Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+        return dist <= Math.sqrt(2.0);
+    }
+
+    private String wordFromDice(ArrayList<DiceCoord> dices) {
+        String word = "";
+
+        for (DiceCoord coord : dices) {
+            word += diceLetters[coord.x][coord.y];
+        }
+
+        return word;
     }
 
     public void setTimeLeft(int seconds) {
@@ -114,7 +209,8 @@ public class GameFrame extends JFrame {
     public void setDices(char[][] letters) {
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
-                diceButton[x * 4 + y].setText(Character.toString(letters[x][y]));
+                diceLetters[x][y] = letters[x][y];
+                diceButtons[x][y].setText(Character.toString(letters[x][y]).toUpperCase());
             }
         }
     }
@@ -126,5 +222,13 @@ public class GameFrame extends JFrame {
             // Space for left padding improves layout
             wordListModel.addElement(" " + word);
         }
+    }
+
+    public void setOnWordListener(OnWordListener listener) {
+        onWordListener = listener;
+    }
+
+    public interface OnWordListener {
+        public void onWord(String word);
     }
 }

@@ -4,6 +4,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +18,7 @@ import java.util.ArrayList;
  */
 public class GameFrame extends JFrame {
     private JLabel timeLabel;
+    private DefaultListModel<String> wordListModel;
     private JList<String> wordList;
     private JButton[] diceButton = new JButton[16];
 
@@ -39,12 +44,12 @@ public class GameFrame extends JFrame {
 
     public void createLayout() {
         // Create label displaying time left
-        JLabel timeCaptionLabel = new JLabel("Time left:");
+        JLabel timeCaptionLabel = new JLabel("Time left");
         timeCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         timeCaptionLabel.setBorder(new EmptyBorder(10, 20, 0, 20));
-        timeCaptionLabel.setFont(new Font(timeCaptionLabel.getFont().getFontName(), Font.PLAIN, 15));
+        timeCaptionLabel.setFont(new Font(timeCaptionLabel.getFont().getFontName(), Font.PLAIN, 25));
 
-        timeLabel = new JLabel("0:00");
+        timeLabel = new JLabel();
         timeLabel.setAlignmentX(CENTER_ALIGNMENT);
         timeLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
         timeLabel.setFont(new Font(timeLabel.getFont().getFontName(), Font.PLAIN, 60));
@@ -58,15 +63,18 @@ public class GameFrame extends JFrame {
         add(timeLabelContainer, BorderLayout.LINE_START);
 
         // Create list containing guessed words
-        JLabel wordCaptionLabel = new JLabel("Words found:");
+        JLabel wordCaptionLabel = new JLabel("Words found");
         wordCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         wordCaptionLabel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        wordCaptionLabel.setFont(new Font(wordCaptionLabel.getFont().getFontName(), Font.PLAIN, 15));
+        wordCaptionLabel.setFont(new Font(wordCaptionLabel.getFont().getFontName(), Font.PLAIN, 25));
 
-        wordList = new JList<String>();
+        wordListModel = new DefaultListModel<String>();
+
+        wordList = new JList<String>(wordListModel);
         wordList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         wordList.setLayoutOrientation(JList.VERTICAL);
         wordList.setVisibleRowCount(-1);
+        wordList.setFont(new Font(wordList.getFont().getFontName(), Font.PLAIN, 20));
 
         JScrollPane wordListScroller = new JScrollPane(wordList);
         wordListScroller.setPreferredSize(new Dimension(160, 800));
@@ -86,11 +94,37 @@ public class GameFrame extends JFrame {
         diceGridContainer.setBorder(new EmptyBorder(10, 0, 10, 0));
 
         for (int i = 0; i < 16; i++) {
-            diceButton[i] = new JButton(Character.toString((char) (i + 'A')));
+            diceButton[i] = new JButton();
             diceButton[i].setFont(new Font(diceButton[i].getFont().getFontName(), Font.PLAIN, 60));
             diceGridContainer.add(diceButton[i]);
         }
 
         add(diceGridContainer, BorderLayout.CENTER);
+    }
+
+    public void setTimeLeft(int seconds) {
+        int minutes = seconds / 60;
+
+        String secs = String.valueOf(seconds % 60);
+        if (secs.length() < 2) secs = "0" + secs;
+
+        timeLabel.setText(minutes + ":" + secs);
+    }
+
+    public void setDices(char[][] letters) {
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
+                diceButton[x * 4 + y].setText(Character.toString(letters[x][y]));
+            }
+        }
+    }
+
+    public void setWordsGuessed(String[] words) {
+        wordListModel.clear();
+
+        for (String word : words) {
+            // Space for left padding improves layout
+            wordListModel.addElement(" " + word);
+        }
     }
 }

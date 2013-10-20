@@ -43,6 +43,10 @@ public abstract class Board {
     // Varies for each board
     public abstract void generateBoard();
 
+    // We chose to reimplement a shuffle array function because even though there is a 
+    // Collections.shuffle function, it only shuffles lists. If we would have to convert 
+    // the array to a list and back, this takes more time then doing it this way. 
+    // The shuffle algorithm is taken from Stack Overflow: http://tinyurl.com/onake63
     protected static String[] shuffleArray(String[] arIn) {
         String[] ar = arIn;
         Random rnd = new Random();
@@ -56,6 +60,7 @@ public abstract class Board {
         return ar;
     }
     
+    // Returns a matrix-like representation of the board
     public String toString() {
         String res = "";
         for(int i=0; i<boardSizeX; i++) {

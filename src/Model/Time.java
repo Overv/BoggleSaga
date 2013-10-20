@@ -33,13 +33,15 @@ public class Time {
     }
     
     public void pause() {
-        
+        // Unimplemented as of now
     }
     
     public void resume() {
-        
+        // Unimplemented as of now
     }
 
+    // Register an observer, the observer will get notified each second through the onTimePassed() callback 
+    // to update the view's time display. When the time is up the timesUp() callback is fired.
     public void setTimeListener(TimeListener listener) {
         timeListener = listener;
     }
@@ -49,7 +51,7 @@ public class Time {
         public void onTimePassed(int timeLeft); // call the model for the current time
     }
     
-    // Inline class, gets triggered when timer ends
+    // Inline class, specifies the callback used to notify Observer when time is up
     class TimeIsUp extends TimerTask {
         public void run() {
             secondsTimer.cancel();
@@ -62,10 +64,11 @@ public class Time {
         }
     }
     
+    // Inline class, specifies the callback used to notify the Observer when a specified time has passed
     class TimeLeft extends TimerTask {
         public void run() {
             if(timeListener != null) {
-                timeListener.onTimePassed(timeLeft); // send time left to the listener
+                timeListener.onTimePassed(timeLeft); // Send time left to the Observer every second
             } else {
                 System.err.println("No listeners registered for time");
             }

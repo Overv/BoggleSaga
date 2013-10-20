@@ -19,9 +19,7 @@ public class Game {
     private Score score;
     private Time time;
     private Dictionary dictionary;
-    
     private ArrayList<String> foundWords;
-    private ArrayList<Observable> observers = new ArrayList<Observable>();
 
     public Game(int boardSizeX, int boardSizeY) {
         this.score = new Score();
@@ -32,76 +30,64 @@ public class Game {
         this.board = boardFactory.createBoard(boardSizeX, boardSizeY);
     }
     
-    public synchronized void registerObserver(Observable observer) {
-        observers.add(observer);
-    }
-
-    public synchronized void removeObserver(Observable observer) {
-        observers.remove(observer);
-    }
-
-    public synchronized void notifyObservers() {
-        // Code sent to observers about state changes
-    }
-
-    public synchronized void start() {
+    public void start() {
         gameStarted = true;
         isPaused = false;
         time.startTime();
     }
 
-    public synchronized Game newGame(int boardSizeX, int boardSizeY) {
+    public Game newGame(int boardSizeX, int boardSizeY) {
         return new Game(boardSizeX, boardSizeY);
     }
 
-    public synchronized Game restart() {
+    public Game restart() {
         return new Game(this.board.getBoardSizeX(), this.board.getBoardSizeY());
     }
 
-    public synchronized int getTimeLeft() {
+    public int getTimeLeft() {
         return this.time.getTimeLeft();
     }
 
-    public synchronized void pause() {
+    public void pause() {
         this.time.pause();
         isPaused = true;
     }
     
-    public synchronized void resume() {
+    public void resume() {
         this.time.resume();
         isPaused = false;
     }
 
-    public synchronized boolean isPaused() {
+    public boolean isPaused() {
         return this.isPaused;
     }
     
-    public synchronized boolean checkWord(String word) {
+    public boolean checkWord(String word) {
         return !getFoundWords().contains(word) && this.dictionary.checkWord(word);
     }
 
-    public synchronized void addWord(String word) {
+    public void addWord(String word) {
         this.foundWords.add(word);
         this.updateScore();
     }
 
-    public synchronized void updateScore() {
+    public void updateScore() {
         this.score.updateScore(foundWords);
     }
     
-    public synchronized int getCurrentScore() {
+    public int getCurrentScore() {
         return this.score.getCurrentScore();
     }
     
-    public synchronized char[][] getDice() {
+    public char[][] getDice() {
         return this.board.getBoard();
     }
     
-    public synchronized ArrayList<String> getFoundWords() {
+    public ArrayList<String> getFoundWords() {
         return this.foundWords;
     }
     
-    public synchronized String toString() {
+    public String toString() {
         return this.board.toString();
     }
     

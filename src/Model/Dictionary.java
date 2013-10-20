@@ -31,7 +31,7 @@ public class Dictionary {
         return instance;
     }
     
-    // Creates a new dictionary and fills it with the words form the wordlist file specified above
+    // Creates a new dictionary and fill it with the words form the wordlist file specified above
     protected Dictionary() {
         // Try to fill the wordlist
         if(fillWordList()) {
@@ -41,7 +41,7 @@ public class Dictionary {
         }
     }
     
-    // Check if a word is valid
+    // Check if a word is valid (present in the wordList and longer than 3 characters)
     public boolean checkWord(String word) {
         word = word.toLowerCase();
         if(word.length() < 3) {
@@ -49,7 +49,6 @@ public class Dictionary {
         } else
             return wordList.contains(word);
     }
-    
     
     // Fills the HashSet from the textfile
     private boolean fillWordList() {

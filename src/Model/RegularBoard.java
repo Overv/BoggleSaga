@@ -25,7 +25,7 @@ public class RegularBoard extends Board{
         int counter = 0;
         for(int i=0; i<boardSizeX; i++) {
             for(int j=0; j<boardSizeY; j++) {
-                board[i][j] = shuffled4x4[counter].charAt(rand.nextInt(5)); // Convert the String array to a char array
+                board[i][j] = shuffled4x4[counter].charAt(rand.nextInt(5)); // Convert the String[] to a char[]
                 counter ++;
             }
         }

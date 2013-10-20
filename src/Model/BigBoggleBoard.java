@@ -7,7 +7,7 @@ package Model;
  * Time: 12:42 PM
  */
 public class BigBoggleBoard extends Board{
-    // implementation for the big boggle board
+    
     public BigBoggleBoard() {
         super(5, 5);
     }

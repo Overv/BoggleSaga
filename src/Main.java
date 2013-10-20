@@ -15,11 +15,11 @@ public class Main {
         view.setTimeLeft(0);
         view.setScore(0);
 
-        view.setDices(new char[][] {
-            {'r', 'y', 'w', 't'},
-            {'h', 'p', 'n', 'e'},
-            {'r', 'c', 's', 'g'},
-            {'e', 's', 'n', 'o'}
+        view.setDice(new char[][]{
+                {'r', 'y', 'w', 't'},
+                {'h', 'p', 'n', 'e'},
+                {'r', 'c', 's', 'g'},
+                {'e', 's', 'n', 'o'}
         });
 
         ArrayList<String> testWordsFound = new ArrayList<String>();

@@ -229,7 +229,7 @@ public class GameFrame extends JFrame {
         scoreLabel.setText(String.valueOf(score));
     }
 
-    public void setDices(char[][] letters) {
+    public void setDice(char[][] letters) {
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
                 diceLetters[x][y] = letters[x][y];

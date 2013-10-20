@@ -13,7 +13,7 @@ public class Time {
     
     private Timer timer;
     private Timer secondsTimer = new Timer();
-    private int gameDuration = 180; // in seconds
+    private int gameDuration = 60; // in seconds
     private int timeLeft;
     private TimeListener timeListener;
     
@@ -28,7 +28,7 @@ public class Time {
     public void startTime() {
         timer.schedule(new TimeIsUp(), gameDuration*1000);
         secondsTimer.schedule(new TimeLeft(), 1*1000); // Callbacks every second
-        timeLeft = 180;
+        timeLeft = gameDuration;
     }
     
     public void pause() {

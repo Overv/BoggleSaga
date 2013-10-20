@@ -5,11 +5,6 @@ import Model.Time;
 import View.GameFrame;
 import Model.Game;
 
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Observable;
-
 /**
  * Created with IntelliJ IDEA.
  * User: rjwvandenberg
@@ -27,14 +22,9 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
         gameModel.setTimeListener(this);
     }
 
-    public void restartGame(){
-        gameModel = gameModel.restart();
-        gameModel.setTimeListener(this);
-        gameView.setDices(gameModel.getDice());
-    }
-
     public void startGame(){
         gameModel.start();
+        gameView.setDice(gameModel.getDice());
     }
 
     public void pauseGame(){

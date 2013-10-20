@@ -77,7 +77,7 @@ public class Game {
     }
     
     public synchronized boolean checkWord(String word) {
-        return this.dictionary.checkWord(word);
+        return !getFoundWords().contains(word) && this.dictionary.checkWord(word);
     }
 
     public synchronized void addWord(String word) {

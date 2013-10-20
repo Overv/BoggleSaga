@@ -43,7 +43,9 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
     public void onWord(String word) {
         if(gameModel.checkWord(word)){
             gameModel.addWord(word);
+
             gameView.setScore(gameModel.getCurrentScore());
+            gameView.setWordsFound(gameModel.getFoundWords());
         }
     }
 

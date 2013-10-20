@@ -1,5 +1,6 @@
-package Model;
+package Tests;
 
+import Model.Dictionary;
 import org.junit.Test;
 
 /**

@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Dictionary;
-import Model.IGameModel;
 import Model.TimeObserverStub;
 import View.GameViewInterfaceStub;
 

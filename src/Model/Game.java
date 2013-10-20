@@ -9,7 +9,7 @@ import java.util.Observable;
  * Date: 10/18/13
  * Time: 10:05 PM
  */
-public class Game implements IGameModel{
+public class Game {
     
     private boolean gameStarted = false;
     private BoardFactory boardFactory;
@@ -30,83 +30,52 @@ public class Game implements IGameModel{
     }
     
     
-    public Dictionary getDictionary() {
-        return this.dictionary;
-    }
-    
-    public Board getBoard() {
-        return this.board;
-    }
-    
-
-    @Override
     public void registerObserver(Observable observer) {
         observers.add(observer);
     }
 
-    @Override
     public void removeObserver(Observable observer) {
         observers.remove(observer);
     }
 
-    @Override
     public void notifyObservers() {
         // Code sent to observers about state changes
     }
 
-    @Override
     public void startGame() {
         gameStarted = true;
         // timer.start
     }
 
-    @Override
     public Game restartGame() {
         return new Game(this.board.getBoardSizeX(), this.board.getBoardSizeY());
     }
 
-    @Override
-    public Time getTime() {
-        return this.getTime();
-    }
-
-    @Override
     public int getTimeLeft() {
-        return this.getTime().timeLeft();
+        return this.time.timeLeft();
     }
 
-    @Override
     public void pauseTime() {
-        this.getTime().pause();
+        this.time.pause();
     }
 
-    @Override
     public Game newGame(int boardSizeX, int boardSizeY) {
         return new Game(boardSizeX, boardSizeY);
     }
 
-    @Override
-    public Score getScore() {
-        return this.getScore();
-    }
-
-    @Override
     public boolean checkWord(String word) {
-        return this.getDictionary().checkWord(word);
+        return this.dictionary.checkWord(word);
     }
 
-    @Override
     public void addWord(String word) {
         this.addWord(word);
     }
 
-    @Override
     public int calculateScore() {
         return this.calculateScore();
     }
     
-    @Override
     public int getCurrentScore() {
-        return this.getScore().getCurrentScore();
+        return this.score.getCurrentScore();
     }
 }

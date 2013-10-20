@@ -234,7 +234,7 @@ public class GameFrame extends JFrame {
         }
     }
 
-    public void setWordsGuessed(String[] words) {
+    public void setWordsFound(ArrayList<String> words) {
         wordListModel.clear();
 
         for (String word : words) {

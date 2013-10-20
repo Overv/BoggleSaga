@@ -20,6 +20,8 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
     public GameController(GameFrame gameView, int x, int y) {
         this.gameView = gameView;
         this.gameView.setOnWordListener(this);
+        this.gameView.setScore(0);
+
         gameModel = new Game(x, y);
         gameModel.setTimeListener(this);
     }

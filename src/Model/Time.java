@@ -12,6 +12,7 @@ import java.util.TimerTask;
 public class Time {
     
     private Timer timer;
+    private Timer secondsTimer;
     private int gameDuration = 180; // in seconds
     private TimeListener timeListener;
     
@@ -25,6 +26,7 @@ public class Time {
     
     public void startTime() {
         timer.schedule(new TimeIsUp(), gameDuration*1000);
+        secondsTimer.schedule(new TimeLeft(), 1); // Callbacks every second
     }
     
     public void pause() {
@@ -41,13 +43,27 @@ public class Time {
 
     public interface TimeListener {
         public void timesUp();
+        public int getTimeLeft(); // call the model for the current time
     }
     
     // Inline class, gets triggered when timer ends
     class TimeIsUp extends TimerTask {
         public void run() {
-            timeListener.timesUp();
-            timer.cancel(); //Terminate the timer thread
+            if(timeListener != null) {
+                timeListener.timesUp();
+            } else {
+                System.out.println("No listeners registered for time");
+            }
+        }
+    }
+    
+    class TimeLeft extends TimerTask {
+        public void run() {
+            if(timeListener != null) {
+                timeListener.getTimeLeft();
+            } else {
+                System.out.println("No listeners registered for time");
+            }
         }
     }
 }

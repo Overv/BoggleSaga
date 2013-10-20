@@ -13,11 +13,13 @@ public class Game {
     
     private boolean gameStarted = false;
     private boolean isPaused = true;
+    
     private BoardFactory boardFactory;
     private Board board;
     private Score score;
     private Time time;
     private Dictionary dictionary;
+    
     private ArrayList<String> foundWords;
     private ArrayList<Observable> observers = new ArrayList<Observable>();
 
@@ -29,7 +31,6 @@ public class Game {
         this.foundWords = new ArrayList<String>();
         this.board = boardFactory.createBoard(boardSizeX, boardSizeY);
     }
-    
     
     public synchronized void registerObserver(Observable observer) {
         observers.add(observer);

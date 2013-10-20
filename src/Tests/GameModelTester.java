@@ -13,6 +13,6 @@ public class GameModelTester {
     public static void main(String args[]) {
         Game game = new Game(4, 4);
         game.startGame();
-        System.out.print(game.getBoard().toString());
+        System.out.print(game.toString());
     }
 }

@@ -12,6 +12,7 @@ import java.util.Observable;
 public class Game {
     
     private boolean gameStarted = false;
+    private boolean isPaused = true;
     private BoardFactory boardFactory;
     private Board board;
     private Score score;
@@ -44,7 +45,8 @@ public class Game {
 
     public void startGame() {
         gameStarted = true;
-        // timer.start
+        isPaused = false;
+        time.startTime();
     }
 
     public Game newGame(int boardSizeX, int boardSizeY) {
@@ -59,8 +61,14 @@ public class Game {
         return this.time.timeLeft();
     }
 
-    public void pauseTime() {
+    public void pause() {
         this.time.pause();
+        isPaused = true;
+    }
+    
+    public void resume() {
+        this.time.resume();
+        isPaused = false;
     }
 
     public boolean checkWord(String word) {

@@ -27,7 +27,7 @@ public class Game {
         this.score = new Score();
         this.time = new Time();
         this.boardFactory = new BoardFactory();
-        this.dictionary = new Dictionary();
+        this.dictionary = Dictionary.getInstance();
         this.foundWords = new ArrayList<String>();
         this.board = boardFactory.createBoard(boardSizeX, boardSizeY);
     }

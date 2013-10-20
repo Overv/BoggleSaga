@@ -17,11 +17,15 @@ public class Score {
     }
     
     public int updateScore(ArrayList<String> foundWords) {
+        currentScore = 0;
+
         for(String word : foundWords) {
             switch(word.length()) {
                 case 0 : System.out.println("Error, word length is 0");
                     break;
-                case 4 : currentScore += 1;
+                case 3:
+                case 4:
+                    currentScore += 1;
                     break;
                 case 5 : currentScore += 2;
                     break;

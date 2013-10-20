@@ -43,7 +43,7 @@ public class Game {
         // Code sent to observers about state changes
     }
 
-    public void startGame() {
+    public void start() {
         gameStarted = true;
         isPaused = false;
         time.startTime();
@@ -53,7 +53,7 @@ public class Game {
         return new Game(boardSizeX, boardSizeY);
     }
 
-    public Game restartGame() {
+    public Game restart() {
         return new Game(this.board.getBoardSizeX(), this.board.getBoardSizeY());
     }
 
@@ -76,7 +76,7 @@ public class Game {
     }
 
     public void addWord(String word) {
-        this.addWord(word);
+        this.foundWords.add(word);
         this.updateScore();
     }
 

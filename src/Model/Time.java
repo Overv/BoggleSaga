@@ -13,6 +13,7 @@ public class Time {
     
     private Timer timer;
     private int gameDuration = 180; // in seconds
+    private TimeListener timeListener;
     
     public Time() {
         timer = new Timer();
@@ -27,17 +28,25 @@ public class Time {
     }
     
     public void pause() {
-        // timer.
+        
     }
     
     public void resume() {
         
     }
 
+    public void setTimeListener(TimeListener listener) {
+        timeListener = listener;
+    }
+
+    public interface TimeListener {
+        public void timesUp();
+    }
+    
     // Inline class, gets triggered when timer ends
     class TimeIsUp extends TimerTask {
         public void run() {
-            System.out.format("Time's up!");
+            timeListener.timesUp();
             timer.cancel(); //Terminate the timer thread
         }
     }

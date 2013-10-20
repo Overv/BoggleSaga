@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class Time {
     
     private Timer timer;
-    private Timer secondsTimer;
+    private Timer secondsTimer = new Timer();
     private int gameDuration = 180; // in seconds
     private int timeLeft;
     private TimeListener timeListener;

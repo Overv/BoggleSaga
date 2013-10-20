@@ -27,7 +27,7 @@ public class Time {
     
     public void startTime() {
         timer.schedule(new TimeIsUp(), gameDuration*1000);
-        secondsTimer.schedule(new TimeLeft(), 1*1000); // Callbacks every second
+        secondsTimer.scheduleAtFixedRate(new TimeLeft(), 0, 1*1000); // Callbacks every second
         timeLeft = gameDuration;
     }
     

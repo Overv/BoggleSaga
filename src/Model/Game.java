@@ -18,7 +18,6 @@ public class Game implements IGameModel{
     private Time time;
     private Dictionary dictionary;
     private ArrayList<String> foundWords;
-    private Game game;
     private ArrayList<Observable> observers = new ArrayList<Observable>();
 
     public Game(int boardSizeX, int boardSizeY) {
@@ -68,7 +67,7 @@ public class Game implements IGameModel{
 
     @Override
     public Time getTime() {
-        return this.game.getTime();
+        return this.getTime();
     }
 
     @Override
@@ -78,7 +77,7 @@ public class Game implements IGameModel{
 
     @Override
     public void pauseTime() {
-        this.game.getTime().pause();
+        this.getTime().pause();
     }
 
     @Override
@@ -88,22 +87,22 @@ public class Game implements IGameModel{
 
     @Override
     public Score getScore() {
-        return this.game.getScore();
+        return this.getScore();
     }
 
     @Override
     public boolean checkWord(String word) {
-        return this.game.getDictionary().checkWord(word);
+        return this.getDictionary().checkWord(word);
     }
 
     @Override
     public void addWord(String word) {
-        this.game.addWord(word);
+        this.addWord(word);
     }
 
     @Override
     public int calculateScore() {
-        return this.game.calculateScore();
+        return this.calculateScore();
     }
     
     @Override

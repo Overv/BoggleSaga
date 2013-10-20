@@ -56,7 +56,7 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
     @Override
     public void timesUp(){
         gameView.setScore(gameModel.getCurrentScore());
-        gameView.setWordsFound((String[])gameModel.getFoundWords().toArray());
+        gameView.setWordsFound(gameModel.getFoundWords());
         gameView.setTimeLeft(gameModel.getTimeLeft());
     }
 

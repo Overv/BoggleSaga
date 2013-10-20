@@ -1,6 +1,8 @@
 import Controller.GameController;
 import View.GameFrame;
 
+import java.util.ArrayList;
+
 public class Main {
     private static GameFrame view;
     private static GameController controller;
@@ -20,7 +22,10 @@ public class Main {
             {'e', 's', 'n', 'o'}
         });
 
-        view.setWordsGuessed(new String[] {"wench", "once"});
+        ArrayList<String> testWordsFound = new ArrayList<String>();
+        testWordsFound.add("hurr");
+        testWordsFound.add("durr");
+        view.setWordsFound(testWordsFound);
 
         view.setOnWordListener(new GameFrame.OnWordListener() {
             @Override

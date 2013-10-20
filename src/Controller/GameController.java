@@ -39,7 +39,7 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     @Override
     public void onWord(String word) {
-        if(Dictionary.getInstance().checkWord(word)){
+        if(gameModel.checkWord(word)){
             gameModel.addWord(word);
             gameView.setScore(gameModel.getCurrentScore());
         }

@@ -14,19 +14,21 @@ public class Time {
     private Timer timer;
     private Timer secondsTimer;
     private int gameDuration = 180; // in seconds
+    private int timeLeft;
     private TimeListener timeListener;
     
     public Time() {
         timer = new Timer();
     }
 
-    public int timeLeft() {
-        return 0;
+    public int getTimeLeft() {
+        return this.timeLeft;
     }
     
     public void startTime() {
         timer.schedule(new TimeIsUp(), gameDuration*1000);
         secondsTimer.schedule(new TimeLeft(), 1); // Callbacks every second
+        timeLeft = 180;
     }
     
     public void pause() {
@@ -64,6 +66,7 @@ public class Time {
             } else {
                 System.out.println("No listeners registered for time");
             }
+            timeLeft -=1; // each callback reduce timeleft by 1
         }
     }
 }

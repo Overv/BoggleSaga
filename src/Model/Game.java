@@ -59,7 +59,7 @@ public class Game {
     }
 
     public synchronized int getTimeLeft() {
-        return this.time.timeLeft();
+        return this.time.getTimeLeft();
     }
 
     public synchronized void pause() {

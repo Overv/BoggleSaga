@@ -71,6 +71,10 @@ public class Game {
         isPaused = false;
     }
 
+    public boolean isPaused() {
+        return this.isPaused;
+    }
+    
     public boolean checkWord(String word) {
         return this.dictionary.checkWord(word);
     }

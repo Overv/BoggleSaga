@@ -16,6 +16,7 @@ public class DiceCoord {
         this.y = y;
     }
 
+    @Override
     public boolean equals(Object other) {
         if (other instanceof DiceCoord) {
             DiceCoord that = (DiceCoord) other;
@@ -23,6 +24,11 @@ public class DiceCoord {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return x | (y << 16);
     }
 
     public String toString() {

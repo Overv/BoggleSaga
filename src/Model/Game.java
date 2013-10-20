@@ -31,76 +31,76 @@ public class Game {
     }
     
     
-    public void registerObserver(Observable observer) {
+    public synchronized void registerObserver(Observable observer) {
         observers.add(observer);
     }
 
-    public void removeObserver(Observable observer) {
+    public synchronized void removeObserver(Observable observer) {
         observers.remove(observer);
     }
 
-    public void notifyObservers() {
+    public synchronized void notifyObservers() {
         // Code sent to observers about state changes
     }
 
-    public void start() {
+    public synchronized void start() {
         gameStarted = true;
         isPaused = false;
         time.startTime();
     }
 
-    public Game newGame(int boardSizeX, int boardSizeY) {
+    public synchronized Game newGame(int boardSizeX, int boardSizeY) {
         return new Game(boardSizeX, boardSizeY);
     }
 
-    public Game restart() {
+    public synchronized Game restart() {
         return new Game(this.board.getBoardSizeX(), this.board.getBoardSizeY());
     }
 
-    public int getTimeLeft() {
+    public synchronized int getTimeLeft() {
         return this.time.timeLeft();
     }
 
-    public void pause() {
+    public synchronized void pause() {
         this.time.pause();
         isPaused = true;
     }
     
-    public void resume() {
+    public synchronized void resume() {
         this.time.resume();
         isPaused = false;
     }
 
-    public boolean isPaused() {
+    public synchronized boolean isPaused() {
         return this.isPaused;
     }
     
-    public boolean checkWord(String word) {
+    public synchronized boolean checkWord(String word) {
         return this.dictionary.checkWord(word);
     }
 
-    public void addWord(String word) {
+    public synchronized void addWord(String word) {
         this.foundWords.add(word);
         this.updateScore();
     }
 
-    public void updateScore() {
+    public synchronized void updateScore() {
         this.score.updateScore(foundWords);
     }
     
-    public int getCurrentScore() {
+    public synchronized int getCurrentScore() {
         return this.score.getCurrentScore();
     }
     
-    public char[][] getDice() {
+    public synchronized char[][] getDice() {
         return this.board.getBoard();
     }
     
-    public ArrayList<String> getFoundWords() {
+    public synchronized ArrayList<String> getFoundWords() {
         return this.foundWords;
     }
     
-    public String toString() {
+    public synchronized String toString() {
         return this.board.toString();
     }
 }

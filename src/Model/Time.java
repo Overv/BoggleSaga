@@ -45,7 +45,7 @@ public class Time {
 
     public interface TimeListener {
         public void timesUp();
-        public int getTimeLeft(); // call the model for the current time
+        public void onTimePassed(int timeLeft); // call the model for the current time
     }
     
     // Inline class, gets triggered when timer ends
@@ -62,7 +62,7 @@ public class Time {
     class TimeLeft extends TimerTask {
         public void run() {
             if(timeListener != null) {
-                timeListener.getTimeLeft();
+                timeListener.onTimePassed(timeLeft); // send time left to the listener
             } else {
                 System.out.println("No listeners registered for time");
             }

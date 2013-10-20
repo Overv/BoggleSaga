@@ -20,7 +20,7 @@ public class Main {
             {'e', 's', 'n', 'o'}
         });
 
-        view.setWordsFound(new String[]{"wench", "once"});
+        view.setWordsGuessed(new String[] {"wench", "once"});
 
         view.setOnWordListener(new GameFrame.OnWordListener() {
             @Override
@@ -29,9 +29,9 @@ public class Main {
             }
         });
 
-        controller = new GameController(view);
+        controller = new GameController(view, 4, 4);
 
-        controller.run();
+        controller.startGame();
 
     }
 }

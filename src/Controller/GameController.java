@@ -1,8 +1,14 @@
 package Controller;
 
 import Model.Dictionary;
+import Model.Time;
 import View.GameFrame;
 import Model.Game;
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Observable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,20 +16,21 @@ import Model.Game;
  * Date: 18/10/13
  * Time: 08:39
  */
-public class GameController implements GameFrame.OnWordListener {
+public class GameController implements GameFrame.OnWordListener, Time.TimeListener {
     GameFrame gameView;
     Game gameModel;
 
-    public GameController(GameFrame gameView) {
+    public GameController(GameFrame gameView, int x, int y) {
         this.gameView = gameView;
-    }
-
-    public void newGame(){
-        gameModel = new Game(4,4);
+        this.gameView.setOnWordListener(this);
+        gameModel = new Game(x, y);
+        gameModel.setTimeListener(this);
     }
 
     public void restartGame(){
         gameModel = gameModel.restart();
+        gameModel.setTimeListener(this);
+        gameView.setDices(gameModel.getDice());
     }
 
     public void startGame(){
@@ -38,33 +45,23 @@ public class GameController implements GameFrame.OnWordListener {
         gameModel.resume();
     }
 
-
-    public void run() {
-
-        gameModel = new Game(4, 4);
-
-        for(;;){
-            //if(!gameModel.isPaused()){
-            gameView.setTimeLeft(gameModel.getTimeLeft());
-            gameView.setDices(gameModel.getDice());
-            gameView.setWordsFound((String[]) gameModel.getFoundWords().toArray());
-            gameView.setScore(gameModel.getCurrentScore());
-            //}
-
-            try { //update 100 times a second
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                //Do nothing?
-            }
-        }
-    }
-
-
     @Override
     public void onWord(String word) {
         if(Dictionary.getInstance().checkWord(word)){
             gameModel.addWord(word);
             gameView.setScore(gameModel.getCurrentScore());
         }
+    }
+
+    @Override
+    public void timesUp(){
+        gameView.setScore(gameModel.getCurrentScore());
+        gameView.setWordsFound((String[])gameModel.getFoundWords().toArray());
+        gameView.setTimeLeft(gameModel.getTimeLeft());
+    }
+
+    @Override
+    public void onTimePassed(int timeLeft){
+        gameView.setTimeLeft(timeLeft);
     }
 }

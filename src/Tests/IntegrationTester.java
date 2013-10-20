@@ -25,7 +25,7 @@ public class IntegrationTester {
 
         view.setDices(game.getDice());
 
-        view.setWordsGuessed(new String[] {"wench", "once"});
+        view.setWordsFound(new String[]{"wench", "once"});
 
         view.setOnWordListener(new GameFrame.OnWordListener() {
             @Override

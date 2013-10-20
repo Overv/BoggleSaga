@@ -1,7 +1,9 @@
+import Controller.GameController;
 import View.GameFrame;
 
 public class Main {
     private static GameFrame view;
+    private static GameController controller;
 
     public static void main(String[] args) {
         // Create components
@@ -18,7 +20,7 @@ public class Main {
             {'e', 's', 'n', 'o'}
         });
 
-        view.setWordsGuessed(new String[] {"wench", "once"});
+        view.setWordsFound(new String[]{"wench", "once"});
 
         view.setOnWordListener(new GameFrame.OnWordListener() {
             @Override
@@ -26,5 +28,10 @@ public class Main {
                 System.out.println("Potential word selected: " + word);
             }
         });
+
+        controller = new GameController(view);
+
+        controller.run();
+
     }
 }

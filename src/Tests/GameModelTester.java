@@ -12,7 +12,7 @@ public class GameModelTester {
     
     public static void main(String args[]) {
         Game game = new Game(4, 4);
-        game.startGame();
+        game.start();
         System.out.print(game.toString());
     }
 }

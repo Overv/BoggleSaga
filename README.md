@@ -32,8 +32,7 @@ Release checklist
 
 * No unsolved compile or runtime errors
 * Play tested
-* 100% test coverage, i.e. every line of code should be executed at least once
-as a result of unit testing
+* Unit tested
 
 Road map
 --------
@@ -53,7 +52,6 @@ will be implemented by the specified members of the team.
 
 **Controller**, which handles:
 
-* Click and drag UI events
 * Checking words
 * Ending the game when the time runs out by opening the end game window
 

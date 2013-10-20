@@ -25,6 +25,7 @@ public class GameFrame extends JFrame {
 
     private boolean draggingWord = false;
     private ArrayList<DiceCoord> diceDragged;
+    private Color defaultTextColor;
 
     private OnWordListener onWordListener;
 
@@ -124,6 +125,9 @@ public class GameFrame extends JFrame {
                 button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 60));
                 button.addMouseListener(createDiceListener(button, x, y));
                 diceGridContainer.add(button);
+
+                // Get default button text color for restoring
+                defaultTextColor = button.getForeground();
             }
         }
 
@@ -152,7 +156,7 @@ public class GameFrame extends JFrame {
 
                 // Reset colors of dices
                 for (DiceCoord coord : diceDragged) {
-                    diceButtons[coord.x][coord.y].setForeground(Color.BLACK);
+                    diceButtons[coord.x][coord.y].setForeground(defaultTextColor);
                 }
 
                 // Check if the selection followed the rules of the game

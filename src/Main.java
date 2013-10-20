@@ -9,6 +9,7 @@ public class Main {
 
         // Temporary setup code
         view.setTimeLeft(0);
+        view.setScore(0);
 
         view.setDices(new char[][] {
             {'r', 'y', 'w', 't'},

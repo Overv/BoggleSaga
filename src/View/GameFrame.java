@@ -16,6 +16,7 @@ import java.util.HashSet;
  */
 public class GameFrame extends JFrame {
     private JLabel timeLabel;
+    private JLabel scoreLabel;
     private DefaultListModel<String> wordListModel;
     private JList<String> wordList;
 
@@ -59,13 +60,27 @@ public class GameFrame extends JFrame {
         timeLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
         timeLabel.setFont(new Font(timeLabel.getFont().getFontName(), Font.PLAIN, 60));
 
-        JPanel timeLabelContainer = new JPanel();
-        timeLabelContainer.setLayout(new BoxLayout(timeLabelContainer, BoxLayout.PAGE_AXIS));
+        // Create score label displaying current score
+        JLabel scoreCaptionLabel = new JLabel("Score");
+        scoreCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
+        scoreCaptionLabel.setBorder(new EmptyBorder(10, 20, 0, 20));
+        scoreCaptionLabel.setFont(new Font(timeCaptionLabel.getFont().getFontName(), Font.PLAIN, 25));
 
-        timeLabelContainer.add(timeCaptionLabel);
-        timeLabelContainer.add(timeLabel);
+        scoreLabel = new JLabel();
+        scoreLabel.setAlignmentX(CENTER_ALIGNMENT);
+        scoreLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
+        scoreLabel.setFont(new Font(scoreLabel.getFont().getFontName(), Font.PLAIN, 60));
 
-        add(timeLabelContainer, BorderLayout.LINE_START);
+        // Create container layout for info labels
+        JPanel infoLabelContainer = new JPanel();
+        infoLabelContainer.setLayout(new BoxLayout(infoLabelContainer, BoxLayout.PAGE_AXIS));
+
+        infoLabelContainer.add(timeCaptionLabel);
+        infoLabelContainer.add(timeLabel);
+        infoLabelContainer.add(scoreCaptionLabel);
+        infoLabelContainer.add(scoreLabel);
+
+        add(infoLabelContainer, BorderLayout.LINE_START);
 
         // Create list containing guessed words
         JLabel wordCaptionLabel = new JLabel("Words found");
@@ -204,6 +219,10 @@ public class GameFrame extends JFrame {
         if (secs.length() < 2) secs = "0" + secs;
 
         timeLabel.setText(minutes + ":" + secs);
+    }
+
+    public void setScore(int score) {
+        scoreLabel.setText(String.valueOf(score));
     }
 
     public void setDices(char[][] letters) {

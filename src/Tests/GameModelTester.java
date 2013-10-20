@@ -1,6 +1,6 @@
 package Tests;
 
-import Model.GameModel;
+import Model.Game;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,9 +11,8 @@ import Model.GameModel;
 public class GameModelTester {
     
     public static void main(String args[]) {
-        GameModel gm = new GameModel();
-        gm.newGame(4, 4);
-        gm.startGame();
-        System.out.print(gm.getGame().getBoard().toString());
+        Game game = new Game(4, 4);
+        game.startGame();
+        System.out.print(game.getBoard().toString());
     }
 }

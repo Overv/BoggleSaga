@@ -28,6 +28,14 @@ public abstract class Board {
         generateBoard();
     }
     
+    public int getBoardSizeX() {
+        return this.boardSizeX;
+    }
+
+    public int getBoardSizeY() {
+        return this.boardSizeY;
+    }
+    
     // Varies for each board
     public abstract void generateBoard();
 

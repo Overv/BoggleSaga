@@ -15,13 +15,16 @@ public interface IGameModel {
     abstract void notifyObservers();
     
     abstract void startGame(); // Use to start a newly created game
-    abstract Game getGame(); // Gets the game instance in the current game
     abstract Time getTime();
-    abstract void newGame(int boardSizeX, int boardSizeY);
-    abstract void restartGame(); // Restart a currently active game
+    abstract Game restartGame(); // Restart a currently active game
     abstract int getTimeLeft(); // Get time left on the timer in seconds
     abstract void pauseTime(); // Stop the timer
+    abstract Game newGame(int boardSizeX, int boardSizeY); // return new game with size x, y
     
     abstract Score getScore(); // Get the score object regarding the current game
+    abstract boolean checkWord(String word);
+    abstract void addWord(String word);
+    abstract int calculateScore(); // returns an int representing the score
+    abstract int getCurrentScore();
     
 }

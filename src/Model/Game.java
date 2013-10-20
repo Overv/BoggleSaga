@@ -104,4 +104,8 @@ public class Game {
     public synchronized String toString() {
         return this.board.toString();
     }
+    
+    public void setTimeListener(Time.TimeListener listener) {
+        this.time.setTimeListener(listener);
+    }
 }

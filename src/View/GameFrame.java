@@ -36,7 +36,7 @@ public class GameFrame extends JFrame {
         } catch (Exception e) {}
 
         // Initialize window properties
-        setSize(800, 600);
+        setSize(800, 500);
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Boggle Saga Inc.");

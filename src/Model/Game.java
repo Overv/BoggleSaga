@@ -79,4 +79,12 @@ public class Game {
     public int getCurrentScore() {
         return this.score.getCurrentScore();
     }
+    
+    public char[][] getDice() {
+        return this.board.getBoard();
+    }
+    
+    public ArrayList<String> getFoundWords() {
+        return this.foundWords;
+    }
 }

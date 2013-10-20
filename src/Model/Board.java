@@ -28,6 +28,10 @@ public abstract class Board {
         generateBoard();
     }
     
+    public char[][] getBoard() {
+        return this.board;
+    }
+    
     public int getBoardSizeX() {
         return this.boardSizeX;
     }

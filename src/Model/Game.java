@@ -87,4 +87,8 @@ public class Game {
     public ArrayList<String> getFoundWords() {
         return this.foundWords;
     }
+    
+    public String toString() {
+        return this.board.toString();
+    }
 }

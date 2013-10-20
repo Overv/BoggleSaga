@@ -5,6 +5,8 @@ import Model.Time;
 import View.GameFrame;
 import Model.Game;
 
+import javax.swing.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: rjwvandenberg
@@ -45,9 +47,8 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     @Override
     public void timesUp(){
-        gameView.setScore(gameModel.getCurrentScore());
-        gameView.setWordsFound(gameModel.getFoundWords());
-        gameView.setTimeLeft(gameModel.getTimeLeft());
+        JOptionPane.showMessageDialog(null, "You found " + gameModel.getFoundWords().size() + " words with a total score of " + gameModel.getCurrentScore() + "!", "Game finished!", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
     @Override

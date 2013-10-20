@@ -12,13 +12,14 @@ import java.util.TimerTask;
 public class Time {
     
     private Timer timer;
-    private Timer secondsTimer = new Timer();
+    private Timer secondsTimer;
     private int gameDuration = 60; // in seconds
     private int timeLeft;
     private TimeListener timeListener;
     
     public Time() {
         timer = new Timer();
+        secondsTimer = new Timer();
     }
 
     public int getTimeLeft() {
@@ -51,10 +52,12 @@ public class Time {
     // Inline class, gets triggered when timer ends
     class TimeIsUp extends TimerTask {
         public void run() {
+            secondsTimer.cancel();
+
             if(timeListener != null) {
                 timeListener.timesUp();
             } else {
-                System.out.println("No listeners registered for time");
+                System.err.println("No listeners registered for time");
             }
         }
     }
@@ -64,9 +67,9 @@ public class Time {
             if(timeListener != null) {
                 timeListener.onTimePassed(timeLeft); // send time left to the listener
             } else {
-                System.out.println("No listeners registered for time");
+                System.err.println("No listeners registered for time");
             }
-            timeLeft -=1; // each callback reduce timeleft by 1
+            timeLeft -= 1; // each callback reduce timeleft by 1
         }
     }
 }

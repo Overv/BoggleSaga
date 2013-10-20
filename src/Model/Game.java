@@ -47,6 +47,10 @@ public class Game {
         // timer.start
     }
 
+    public Game newGame(int boardSizeX, int boardSizeY) {
+        return new Game(boardSizeX, boardSizeY);
+    }
+
     public Game restartGame() {
         return new Game(this.board.getBoardSizeX(), this.board.getBoardSizeY());
     }
@@ -59,20 +63,17 @@ public class Game {
         this.time.pause();
     }
 
-    public Game newGame(int boardSizeX, int boardSizeY) {
-        return new Game(boardSizeX, boardSizeY);
-    }
-
     public boolean checkWord(String word) {
         return this.dictionary.checkWord(word);
     }
 
     public void addWord(String word) {
         this.addWord(word);
+        this.updateScore();
     }
 
-    public int calculateScore() {
-        return this.calculateScore();
+    public void updateScore() {
+        this.score.updateScore(foundWords);
     }
     
     public int getCurrentScore() {

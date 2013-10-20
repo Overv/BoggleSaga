@@ -16,7 +16,7 @@ public class Score {
         currentScore = 0;
     }
     
-    public int calculateScore(ArrayList<String> foundWords) {
+    public int updateScore(ArrayList<String> foundWords) {
         for(String word : foundWords) {
             switch(word.length()) {
                 case 0 : System.out.println("Error, word length is 0");

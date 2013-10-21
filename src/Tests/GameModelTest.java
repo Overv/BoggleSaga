@@ -1,6 +1,7 @@
 package Tests;
 
 import Model.Game;
+import org.junit.Test;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,9 +9,9 @@ import Model.Game;
  * Date: 10/18/13
  * Time: 9:58 PM
  */
-public class GameModelTester {
-    
-    public static void main(String args[]) {
+public class GameModelTest {
+    @Test
+    public void GameModelTester() {
         Game game = new Game(4, 4);
         game.start();
         System.out.print(game.toString());

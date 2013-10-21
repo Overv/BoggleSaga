@@ -2,7 +2,6 @@ package Model;
 
 import java.io.*;
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * Created with IntelliJ IDEA.
@@ -78,7 +77,6 @@ public class Highscore {
         Collections.sort(this.highscores, new ascendingComparator());
     }
 
-    // 
     public class ascendingComparator implements Comparator<HighscoreEntry> {
         @Override
         public int compare(HighscoreEntry o1, HighscoreEntry o2) {

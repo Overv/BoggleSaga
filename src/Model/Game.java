@@ -94,4 +94,8 @@ public class Game {
     public void setTimeListener(Time.TimeListener listener) {
         this.time.setTimeListener(listener);
     }
+    
+    public String getBestWord() {
+        return this.score.getBestWord();
+    }
 }

@@ -51,7 +51,8 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     @Override
     public void timesUp(){
-        JOptionPane.showMessageDialog(null, "You found " + gameModel.getFoundWords().size() + " words with a total score of " + gameModel.getCurrentScore() + "!", "Game finished!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "You found " + gameModel.getFoundWords().size() + " words with a total score of " 
+                + gameModel.getCurrentScore() + "!\n" + "Your best word was: " + gameModel.getBestWord() + "!", "Game finished!", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }
 

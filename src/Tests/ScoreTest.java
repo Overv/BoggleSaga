@@ -33,5 +33,6 @@ public class ScoreTest {
         foundWords.add("fairytale"); // 11 points
         score.updateScore(foundWords);
         assert score.getCurrentScore() == 22;
+        System.out.println(score.getBestWord());
     }
 }

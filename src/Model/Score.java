@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Score {
     
     private int currentScore;
+    private String bestWord = "";
 
     public Score() {
         currentScore = 0;
@@ -20,6 +21,9 @@ public class Score {
         currentScore = 0;
 
         for(String word : foundWords) {
+            if (word.length() > bestWord.length()) {
+                bestWord = word;
+            }
             switch(word.length()) {
                 case 0 : System.out.println("Error, word length is 0");
                     break;
@@ -43,4 +47,8 @@ public class Score {
         return this.currentScore;
     }
     
+    // Gets displayed in endscreen
+    public String getBestWord() {
+        return this.bestWord;
+    }
 }

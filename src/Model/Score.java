@@ -20,10 +20,13 @@ public class Score {
     public int updateScore(ArrayList<String> foundWords) {
         currentScore = 0;
 
+        // update best word
         for(String word : foundWords) {
             if (word.length() > bestWord.length()) {
                 bestWord = word;
             }
+            
+            // update score
             switch(word.length()) {
                 case 0 : System.out.println("Error, word length is 0");
                     break;

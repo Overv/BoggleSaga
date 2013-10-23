@@ -44,10 +44,6 @@ public class Game {
         return new Game(this.board.getBoardSizeX(), this.board.getBoardSizeY());
     }
 
-    public int getTimeLeft() {
-        return this.time.getTimeLeft();
-    }
-
     public void pause() {
         this.time.pause();
         isPaused = true;

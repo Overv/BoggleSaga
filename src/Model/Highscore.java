@@ -19,6 +19,11 @@ public class Highscore {
         fillHighscoreList();
     }
     
+    // Returns all the highscores sorted on descending order
+    public ArrayList<HighscoreEntry> getHighscores() {
+        return this.highscores;
+    }
+    
     public void fillHighscoreList() {
         File f = new File(pathToHighscoreFile);
         BufferedReader br = null;

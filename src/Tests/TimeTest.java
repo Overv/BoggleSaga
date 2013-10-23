@@ -1,5 +1,6 @@
-package Model;
+package Tests;
 
+import Model.Time;
 import org.junit.Test;
 
 /**

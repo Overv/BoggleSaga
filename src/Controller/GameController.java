@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Dictionary;
+import Model.Sound;
 import Model.Time;
 import View.GameFrame;
 import Model.Game;
@@ -28,6 +29,7 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     public void startGame(){
         gameModel.start();
+        Sound.playGameSound();
         gameView.setDice(gameModel.getDice());
     }
 
@@ -43,6 +45,7 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
     public void onWord(String word) {
         if(gameModel.checkWord(word)){
             gameModel.addWord(word);
+            Sound.playFoundWordSound();
 
             gameView.setScore(gameModel.getCurrentScore());
             gameView.setWordsFound(gameModel.getFoundWords());

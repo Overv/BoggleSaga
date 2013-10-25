@@ -45,7 +45,7 @@ public abstract class Board {
 
     private ArrayList<String> allWords;
 
-    // Computationally intensive (~1 second), don't run in UI thread
+    // Computationally intensive (up to 100 ms), don't run in UI thread
     // Result is cached
     public ArrayList<String> findAllWords() {
         if (allWords == null) {

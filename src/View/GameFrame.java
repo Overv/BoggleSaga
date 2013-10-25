@@ -1,5 +1,7 @@
 package View;
 
+import Model.DiceCoord;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -243,7 +245,7 @@ public class GameFrame extends JFrame {
 
         for (String word : words) {
             // Space for left padding improves layout
-            wordListModel.addElement(" " + word);
+            wordListModel.addElement(" " + word.substring(0, 1).toUpperCase() + word.substring(1));
         }
     }
 

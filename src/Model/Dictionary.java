@@ -21,7 +21,8 @@ public class Dictionary {
     private static Dictionary instance = null;
     
     private static String pathToDictionaryFile = "src/Resources/wordlist_english.txt";
-    private static Set<String> wordList = null;
+
+    private Set<String> wordList = null;
 
     // Initializer for the Singleton
     public static Dictionary getInstance() {
@@ -48,6 +49,10 @@ public class Dictionary {
             return false;
         } else
             return wordList.contains(word);
+    }
+
+    public Iterable<String> getWords() {
+        return wordList;
     }
     
     // Fills the HashSet from the textfile

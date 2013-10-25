@@ -1,4 +1,4 @@
-package View;
+package Model;
 
 /**
  * Created with IntelliJ IDEA.

@@ -78,6 +78,10 @@ public class Game {
     public char[][] getDice() {
         return this.board.getBoard();
     }
+
+    public ArrayList<String> findAllWords() {
+        return this.board.findAllWords();
+    }
     
     public ArrayList<String> getFoundWords() {
         return this.foundWords;

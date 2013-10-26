@@ -1,0 +1,3 @@
+sound ON
+music ON
+gametype BOGGLE

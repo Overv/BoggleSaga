@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Settings;
+import Model.Settings.*;
 import Model.Dictionary;
 import Model.Sound;
 import Model.Time;
@@ -18,12 +20,17 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
     GameFrame gameView;
     Game gameModel;
 
-    public GameController(GameFrame gameView, int x, int y) {
+    public GameController(GameFrame gameView) {
         this.gameView = gameView;
         this.gameView.setOnWordListener(this);
         this.gameView.setScore(0);
 
-        gameModel = new Game(x, y);
+        if(Settings.getGameType() == GameType.BIGBOGGLE){
+            gameModel = new Game(5,5);
+        }
+        else {
+            gameModel = new Game(4,4);
+        }
         gameModel.setTimeListener(this);
     }
 

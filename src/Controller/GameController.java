@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Settings;
 import Model.Settings.*;
-import Model.Dictionary;
 import Model.Sound;
 import Model.Time;
 import View.GameFrame;
@@ -29,7 +28,7 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
         }
         else {
             gameModel = new Game(4,4);
-            gameView = new GameFrame(5,5);
+            gameView = new GameFrame(4,4);
         }
         
         this.gameView.setOnWordListener(this);

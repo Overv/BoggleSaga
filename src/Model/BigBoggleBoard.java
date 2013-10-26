@@ -8,12 +8,14 @@ package Model;
  */
 public class BigBoggleBoard extends Board{
     
+    private String dice[] = {"aaafrs", "aaeeee", "aafirs", "adennn", "aeeeem", 
+            "aeegmu", "aegmnn", "afirsy", "bjkqxz", "ccenst",
+            "ceiilt", "ceilpt", "ceipst", "ddhnot", "dhhlor",
+            "dhlnor", "dhlnor", "eiiitt", "emottt", "ensssu",
+            "fiprsy", "gorrvw", "iprrry", "nootuw", "ooottu"};
+    
     public BigBoggleBoard() {
         super(5, 5);
-    }
-
-    @Override
-    public void generateBoard() {
-        // Implement for BigBoggle support
+        generateBoard(dice);
     }
 }

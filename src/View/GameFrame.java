@@ -17,13 +17,17 @@ import java.util.HashSet;
  * Time: 9:18 PM
  */
 public class GameFrame extends JFrame {
+    
+    private int gridWidth;
+    private int gridHeight;
+    
     private JLabel timeLabel;
     private JLabel scoreLabel;
     private DefaultListModel<String> wordListModel;
     private JList<String> wordList;
 
-    private JButton[][] diceButtons = new JButton[4][4];
-    private char[][] diceLetters = new char[4][4];
+    private JButton[][] diceButtons; 
+    private char[][] diceLetters; 
 
     private boolean draggingWord = false;
     private ArrayList<DiceCoord> diceDragged;
@@ -31,7 +35,15 @@ public class GameFrame extends JFrame {
 
     private OnWordListener onWordListener;
 
-    public GameFrame() {
+    public GameFrame(int gridWidth, int gridHeight) {
+        // set the ammount of buttons and letters based on size
+        diceButtons = new JButton[gridWidth][gridHeight];
+        diceLetters = new char[gridWidth][gridHeight];
+        
+        // set gridWith & height
+        this.gridWidth = gridWidth;
+        this.gridHeight = gridHeight;
+        
         // Use native look and feel (if this fails, we have bigger problems)
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -111,8 +123,8 @@ public class GameFrame extends JFrame {
 
         add(wordListContainer, BorderLayout.LINE_END);
 
-        // Add grid with 4x4 dices
-        GridLayout gridLayout = new GridLayout(4, 4);
+        // Add grid with widthxheight dices
+        GridLayout gridLayout = new GridLayout(gridWidth, gridHeight);
         gridLayout.setHgap(30);
         gridLayout.setVgap(30);
 
@@ -121,8 +133,8 @@ public class GameFrame extends JFrame {
         diceGridContainer.setBorder(new EmptyBorder(10, 0, 10, 0));
 
         // Create button for each dice
-        for (int y = 0; y < 4; y++) {
-            for (int x = 0; x < 4; x++) {
+        for (int y = 0; y < gridWidth; y++) {
+            for (int x = 0; x < gridHeight; x++) {
                 final JButton button = diceButtons[x][y] = new JButton();
                 button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 60));
                 button.addMouseListener(createDiceListener(button, x, y));
@@ -232,8 +244,8 @@ public class GameFrame extends JFrame {
     }
 
     public void setDice(char[][] letters) {
-        for (int x = 0; x < 4; x++) {
-            for (int y = 0; y < 4; y++) {
+        for (int x = 0; x < gridWidth; x++) {
+            for (int y = 0; y < gridHeight; y++) {
                 diceLetters[x][y] = letters[x][y];
                 diceButtons[x][y].setText(Character.toString(letters[x][y]).toUpperCase());
             }

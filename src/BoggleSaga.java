@@ -10,8 +10,7 @@ public class BoggleSaga {
         Settings.loadSettings();
 
         // Create components
-        GameFrame view = new GameFrame();
-        GameController controller = new GameController(view);
+        GameController controller = new GameController();
 
         // Start game
         controller.startGame();

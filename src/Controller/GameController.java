@@ -20,17 +20,20 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
     GameFrame gameView;
     Game gameModel;
 
-    public GameController(GameFrame gameView) {
-        this.gameView = gameView;
-        this.gameView.setOnWordListener(this);
-        this.gameView.setScore(0);
+    public GameController() {
 
+        // load model and view based on the size specified in the settings
         if(Settings.getGameType() == GameType.BIGBOGGLE){
             gameModel = new Game(5,5);
+            gameView = new GameFrame(5, 5);
         }
         else {
             gameModel = new Game(4,4);
+            gameView = new GameFrame(5,5);
         }
+        
+        this.gameView.setOnWordListener(this);
+        this.gameView.setScore(0);
         gameModel.setTimeListener(this);
     }
 

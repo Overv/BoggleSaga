@@ -25,7 +25,6 @@ public abstract class Board {
         this.boardSizeY = boardSizeY;
         this.boardSize = boardSizeX * boardSizeY;
         this.board = new char[boardSizeX][boardSizeY];
-        generateBoard();
     }
     
     public char[][] getBoard() {
@@ -40,8 +39,19 @@ public abstract class Board {
         return this.boardSizeY;
     }
     
-    // Varies for each board
-    public abstract void generateBoard();
+    // Generates a board, independent of the size of the board
+    public void generateBoard(String[] dice) {
+        // shuffle dice
+        String[] shuffled4x4 = shuffleArray(dice);
+        // fill the board with the generated letters
+        int counter = 0;
+        for(int i=0; i<boardSizeX; i++) {
+            for(int j=0; j<boardSizeY; j++) {
+                board[i][j] = shuffled4x4[counter].charAt(rand.nextInt(5)); // Convert the String[] to a char[]
+                counter ++;
+            }
+        }
+    }
 
     private ArrayList<String> allWords;
 

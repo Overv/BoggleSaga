@@ -6,6 +6,7 @@ import Model.Sound;
 import Model.Time;
 import View.GameFrame;
 import Model.Game;
+import Model.StatisticsEntry;
 
 import javax.swing.*;
 
@@ -38,7 +39,9 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     public void startGame(){
         gameModel.start();
-        Sound.playGameSound();
+
+        if(Settings.isMusicEnabled())
+            Sound.playGameSound();
         gameView.setDice(gameModel.getDice());
     }
 
@@ -52,9 +55,16 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     @Override
     public void onWord(String word) {
-        if(gameModel.checkWord(word)){
+        int timeLeft = gameModel.getTimeLeft();
+        boolean wordCorrect = gameModel.checkWord(word);
+
+        //Record statistics about game
+        gameModel.addStatisticsEntry(new StatisticsEntry(timeLeft, word, wordCorrect, Settings.getGameType()));
+
+        if(wordCorrect){
             gameModel.addWord(word);
-            Sound.playFoundWordSound();
+            if(Settings.isSoundEnabled())
+                Sound.playFoundWordSound();
 
             gameView.setScore(gameModel.getCurrentScore());
             gameView.setWordsFound(gameModel.getFoundWords());
@@ -63,6 +73,8 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     @Override
     public void timesUp(){
+        gameModel.printStatistics();
+        gameModel.printAchievements();
         JOptionPane.showMessageDialog(null, "You found " + gameModel.getFoundWords().size() + " words with a total score of " 
                 + gameModel.getCurrentScore() + "!\n" + "Your best word was: " + gameModel.getBestWord() + "!", "Game finished!", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);

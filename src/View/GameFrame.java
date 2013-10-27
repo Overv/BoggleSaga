@@ -136,7 +136,7 @@ public class GameFrame extends JFrame {
         for (int y = 0; y < gridWidth; y++) {
             for (int x = 0; x < gridHeight; x++) {
                 final JButton button = diceButtons[x][y] = new JButton();
-                button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 45));
+                button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 40));
                 button.addMouseListener(createDiceListener(button, x, y));
                 diceGridContainer.add(button);
 

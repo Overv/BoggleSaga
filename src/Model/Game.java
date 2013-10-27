@@ -20,6 +20,7 @@ public class Game {
     private Time time;
     private Dictionary dictionary;
     private ArrayList<String> foundWords;
+    private Statistics statistics;
 
     public Game(int boardSizeX, int boardSizeY) {
         this.score = new Score();
@@ -28,6 +29,7 @@ public class Game {
         this.dictionary = Dictionary.getInstance();
         this.foundWords = new ArrayList<String>();
         this.board = boardFactory.createBoard(boardSizeX, boardSizeY);
+        this.statistics = new Statistics();
     }
     
     public void start() {
@@ -97,5 +99,26 @@ public class Game {
     
     public String getBestWord() {
         return this.score.getBestWord();
+    }
+
+    public int getTimeLeft(){
+        return time.getTimeLeft();
+    }
+
+    // Methods for Statistics access
+    public void addStatisticsEntry(StatisticsEntry entry){
+        statistics.addEntry(entry);
+    }
+
+    public ArrayList<Achievement> getAchievements(){
+        return statistics.getAchievements();
+    }
+
+    public void printStatistics(){
+        statistics.print();
+    }
+
+    public void printAchievements(){
+        statistics.printAchievements();
     }
 }

@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SettingsPanel extends JPanel implements ActionListener {
+public class SettingsFrame extends JFrame implements ActionListener {
     //buttons for setting options
 
     private JButton soundButton;
@@ -18,8 +18,17 @@ public class SettingsPanel extends JPanel implements ActionListener {
     private JButton close;
 
 
-    public SettingsPanel() {
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+    public SettingsFrame() {
+        // Initialize window properties
+        setSize(180, 180);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setTitle("Settings");
+
+        // Create layout
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+
         JLabel setting = new JLabel("Settings");
 
         JLabel soundLabel = new JLabel("Sound:");
@@ -48,11 +57,16 @@ public class SettingsPanel extends JPanel implements ActionListener {
         gametypeButton.addActionListener(this);
         close.addActionListener(this);
 
-        this.add(setting);
-        this.add(soundPanel);
-        this.add(musicPanel);
-        this.add(gametypePanel);
-        this.add(close);
+        container.add(setting);
+        container.add(soundPanel);
+        container.add(musicPanel);
+        container.add(gametypePanel);
+        container.add(close);
+
+        this.add(container);
+
+        // Show window
+        setVisible(true);
     }
 
     @Override
@@ -72,7 +86,8 @@ public class SettingsPanel extends JPanel implements ActionListener {
             gametypeButton.setText(Settings.getGameType().toString());
         }
         else if(source == close){
-            //do something
+            setVisible(false);
+            dispose();
         }
     }
 }

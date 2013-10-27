@@ -43,11 +43,6 @@ public class GameFrame extends JFrame {
         // set gridWith & height
         this.gridWidth = gridWidth;
         this.gridHeight = gridHeight;
-        
-        // Use native look and feel (if this fails, we have bigger problems)
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {}
 
         // Initialize window properties
         setSize(800, 500);

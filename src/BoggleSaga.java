@@ -1,6 +1,7 @@
 import Controller.GameController;
 import Model.Settings;
 import View.GameFrame;
+import View.SplashFrame;
 
 import java.util.ArrayList;
 
@@ -9,10 +10,13 @@ public class BoggleSaga {
         // Load settings
         Settings.loadSettings();
 
+        // Show splash screen
+        new SplashFrame();
+
         // Create components
-        GameController controller = new GameController();
+        /*GameController controller = new GameController();
 
         // Start game
-        controller.startGame();
+        controller.startGame();*/
     }
 }

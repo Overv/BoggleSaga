@@ -43,6 +43,8 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
         if(Settings.isMusicEnabled())
             Sound.playGameSound();
         gameView.setDice(gameModel.getDice());
+
+        System.out.println(gameModel.findAllWords().size());
     }
 
     public void pauseGame(){

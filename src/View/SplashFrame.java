@@ -1,8 +1,12 @@
 package View;
 
+import Model.Settings;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,7 +17,9 @@ import java.awt.event.MouseListener;
  * Time: 0:03
  * To change this template use File | Settings | File Templates.
  */
-public class SplashFrame extends JFrame {
+public class SplashFrame extends JFrame implements ActionListener {
+    private JCheckBox musicCheckbox, soundCheckbox;
+
     public SplashFrame() {
         // Use native look and feel (if this fails, we have bigger problems)
         try {
@@ -21,7 +27,7 @@ public class SplashFrame extends JFrame {
         } catch (Exception e) {}
 
         // Initialize window properties
-        setSize(250, 280);
+        setSize(250, 325);
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Boggle Saga Inc.");
@@ -79,36 +85,46 @@ public class SplashFrame extends JFrame {
 
         viewContainer.add(bigBoggleButtonContainer);
 
-        // Settings button
-        JPanel settingsButtonContainer = new JPanel();
-        settingsButtonContainer.setLayout(new BoxLayout(settingsButtonContainer, BoxLayout.PAGE_AXIS));
-        settingsButtonContainer.setBorder(new EmptyBorder(0, 0, 5, 0));
+        // Music setting checkbox
+        JPanel musicCheckboxContainer = new JPanel();
+        musicCheckboxContainer.setLayout(new BoxLayout(musicCheckboxContainer, BoxLayout.PAGE_AXIS));
+        musicCheckboxContainer.setBorder(new EmptyBorder(30, 0, 0, 0));
 
-        JButton settingsButton = new JButton("Settings");
-        settingsButton.setAlignmentX(CENTER_ALIGNMENT);
-        settingsButton.setBorder(new EmptyBorder(10, 86, 10, 86));
-        settingsButton.setFont(new Font(settingsButton.getFont().getFontName(), Font.PLAIN, 14));
-        settingsButtonContainer.add(settingsButton);
+        musicCheckbox = new JCheckBox("Music");
+        musicCheckbox.setSelected(Settings.isMusicEnabled());
+        musicCheckbox.addActionListener(this);
+        musicCheckbox.setAlignmentX(CENTER_ALIGNMENT);
+        musicCheckbox.setFont(new Font(musicCheckbox.getFont().getFontName(), Font.BOLD, 14));
+        musicCheckboxContainer.add(musicCheckbox);
 
-        settingsButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new SettingsFrame();
-            }
+        viewContainer.add(musicCheckboxContainer);
 
-            @Override
-            public void mousePressed(MouseEvent e) {}
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-            @Override
-            public void mouseExited(MouseEvent e) {}
-        });
+        // Sound setting checkbox
+        JPanel soundCheckboxContainer = new JPanel();
+        soundCheckboxContainer.setLayout(new BoxLayout(soundCheckboxContainer, BoxLayout.PAGE_AXIS));
+        soundCheckboxContainer.setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        viewContainer.add(settingsButtonContainer);
+        soundCheckbox = new JCheckBox("Sound");
+        soundCheckbox.setSelected(Settings.isSoundEnabled());
+        soundCheckbox.addActionListener(this);
+        soundCheckbox.setAlignmentX(CENTER_ALIGNMENT);
+        soundCheckbox.setFont(new Font(soundCheckbox.getFont().getFontName(), Font.BOLD, 14));
+        soundCheckboxContainer.add(soundCheckbox);
+
+        viewContainer.add(soundCheckboxContainer);
 
         // Add controls to frame
         add(viewContainer);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if(source == musicCheckbox){
+            Settings.setMusic(Settings.isMusicEnabled() ? Settings.MusicSetting.OFF : Settings.MusicSetting.ON);
+        } else if(source == soundCheckbox){
+            Settings.setSound(Settings.isSoundEnabled() ? Settings.SoundSetting.OFF : Settings.SoundSetting.ON);
+        }
     }
 }

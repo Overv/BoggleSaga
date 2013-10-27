@@ -38,8 +38,8 @@ public class Statistics {
     public ArrayList<Achievement> getAchievements(){
         ArrayList<Achievement> alist = new ArrayList<Achievement>();
 
-        addAchievement(alist, getFalseWordsAchievement());
-        addAchievement(alist, getLongestWordAchievement());
+        addAchievement(alist, getWordLongerThan7());
+        addAchievement(alist, getOverHalfFalseWords());
 
         return alist;
     }
@@ -70,37 +70,32 @@ public class Statistics {
 
 
     //Individual achievement calculation
-    private Achievement<Integer> getFalseWordsAchievement(){
+    private Achievement<String> getOverHalfFalseWords(){
         int falsewords = 0;
+        int correctwords = 0;
 
         for(StatisticsEntry entry : data){
             if(!entry.isWordCorrect()){
                 falsewords++;
             }
+            else {
+                correctwords++;
+            }
         }
 
-        if(falsewords>=10){
-            return new Achievement<Integer>("Number of False Words", falsewords, "flavourtext");
+        if(falsewords>correctwords){
+            return new Achievement<String>("Over half the words found were no real words", "", "Scrub");
         }
 
         return null;
     }
 
-    private Achievement<String> getLongestWordAchievement(){
-        int longest = 0;
-        String word = "";
-
+    private Achievement<String> getWordLongerThan7(){
         for(StatisticsEntry entry: data){
-            if(entry.isWordCorrect() && entry.getWord().length() > longest){
-                word = entry.getWord();
-                longest = word.length();
+            if(entry.getWord().length() > 7){
+                return new Achievement<String>("Found word longer than 7 letters", "", "flavourtext");
             }
         }
-
-        if(longest > 2){
-            return new Achievement<String>("Longest Word", word, "flavourtext");
-        }
-
         return null;
     }
 }

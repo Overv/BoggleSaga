@@ -13,7 +13,7 @@ public class Time {
     
     private Timer timer;
     private Timer secondsTimer;
-    private int gameDuration = 1; // in seconds
+    private int gameDuration = 60; // in seconds
     private int timeLeft;
     private TimeListener timeListener;
     

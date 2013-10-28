@@ -11,12 +11,18 @@ public class BoggleSaga {
         Settings.loadSettings();
 
         // Show splash screen
-        new SplashFrame();
+        SplashFrame splashFrame = new SplashFrame();
 
-        // Create components
-        /*GameController controller = new GameController();
+        // Add callback to start main game
+        splashFrame.setOnStartGameListener(new SplashFrame.OnStartGameListener() {
+            @Override
+            public void onStart() {
+                // Create components
+                GameController controller = new GameController();
 
-        // Start game
-        controller.startGame();*/
+                // Start game
+                controller.startGame();
+            }
+        });
     }
 }

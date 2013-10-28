@@ -19,6 +19,9 @@ import java.awt.event.MouseListener;
  */
 public class SplashFrame extends JFrame implements ActionListener {
     private JCheckBox musicCheckbox, soundCheckbox;
+    private JButton boggleButton, bigBoggleButton;
+
+    private OnStartGameListener listener;
 
     public SplashFrame() {
         // Use native look and feel (if this fails, we have bigger problems)
@@ -38,6 +41,10 @@ public class SplashFrame extends JFrame implements ActionListener {
 
         // Show window
         setVisible(true);
+    }
+
+    public void setOnStartGameListener(OnStartGameListener listener) {
+        this.listener = listener;
     }
 
     private void createLayout() {
@@ -64,7 +71,8 @@ public class SplashFrame extends JFrame implements ActionListener {
         boggleButtonContainer.setLayout(new BoxLayout(boggleButtonContainer, BoxLayout.PAGE_AXIS));
         boggleButtonContainer.setBorder(new EmptyBorder(0, 0, 5, 0));
 
-        JButton boggleButton = new JButton("Boggle");
+        boggleButton = new JButton("Boggle");
+        boggleButton.addActionListener(this);
         boggleButton.setAlignmentX(CENTER_ALIGNMENT);
         boggleButton.setBorder(new EmptyBorder(10, 90, 10, 90));
         boggleButton.setFont(new Font(boggleButton.getFont().getFontName(), Font.PLAIN, 14));
@@ -77,7 +85,8 @@ public class SplashFrame extends JFrame implements ActionListener {
         bigBoggleButtonContainer.setLayout(new BoxLayout(bigBoggleButtonContainer, BoxLayout.PAGE_AXIS));
         bigBoggleButtonContainer.setBorder(new EmptyBorder(0, 0, 5, 0));
 
-        JButton bigBoggleButton = new JButton("Big Boggle");
+        bigBoggleButton = new JButton("Big Boggle");
+        bigBoggleButton.addActionListener(this);
         bigBoggleButton.setAlignmentX(CENTER_ALIGNMENT);
         bigBoggleButton.setBorder(new EmptyBorder(10, 79, 10, 79));
         bigBoggleButton.setFont(new Font(bigBoggleButton.getFont().getFontName(), Font.PLAIN, 14));
@@ -121,10 +130,21 @@ public class SplashFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
-        if(source == musicCheckbox){
+        if (source == musicCheckbox){
             Settings.setMusic(Settings.isMusicEnabled() ? Settings.MusicSetting.OFF : Settings.MusicSetting.ON);
-        } else if(source == soundCheckbox){
+        } else if (source == soundCheckbox){
             Settings.setSound(Settings.isSoundEnabled() ? Settings.SoundSetting.OFF : Settings.SoundSetting.ON);
+        } else if (source == boggleButton || source == bigBoggleButton) {
+            Settings.setGametype(source == boggleButton ? Settings.GameType.BOGGLE : Settings.GameType.BIGBOGGLE);
+
+            setVisible(false);
+            dispose();
+
+            listener.onStart();
         }
+    }
+
+    public interface OnStartGameListener {
+        public void onStart();
     }
 }

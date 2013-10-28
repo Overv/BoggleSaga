@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -67,6 +68,8 @@ public abstract class Board {
                     allWords.add(word);
                 }
             }
+
+            Collections.sort(allWords);
         }
 
         return allWords;

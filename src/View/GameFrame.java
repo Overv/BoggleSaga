@@ -119,7 +119,7 @@ public class GameFrame extends JFrame {
         add(wordListContainer, BorderLayout.LINE_END);
 
         // Add grid with widthxheight dices
-        GridLayout gridLayout = new GridLayout(gridWidth, gridHeight);
+        GridLayout gridLayout = new GridLayout(gridHeight, gridWidth);
         gridLayout.setHgap(30);
         gridLayout.setVgap(30);
 

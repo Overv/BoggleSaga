@@ -20,7 +20,8 @@ public class Sound {
     public static String FOUND_WORD_SOUND = "src/Resources/Sounds/found_word.wav";
     public static String ACHIEVEMENT_SOUND = "src/Resources/Sounds/achievement.wav";
     public static String GAME_SOUND = "src/Resources/Sounds/game.wav";
-    
+
+    private static InputStream musicStream;
 
     public static void playFoundWordSound() {
         playSound(FOUND_WORD_SOUND);
@@ -48,6 +49,17 @@ public class Sound {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+
+        if (audioFileIn.equals(GAME_SOUND)) {
+            musicStream = audioStream;
+        }
+
         AudioPlayer.player.start(audioStream);
+    }
+
+    public static void stopMusic() {
+        if (musicStream != null) {
+            AudioPlayer.player.stop(musicStream);
+        }
     }
 }

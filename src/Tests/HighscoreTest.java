@@ -12,26 +12,26 @@ import org.junit.Test;
 public class HighscoreTest {
     @Test
     public void testFillHighscoreList() throws Exception {
-        Highscore highscore = new Highscore();
+        Highscore highscore = Highscore.getInstance();
         System.out.println(highscore.toString());
     }
 
     @Test
     public void testAddHighscore() throws Exception {
-        Highscore highscore = new Highscore();
+        Highscore highscore = Highscore.getInstance();
         highscore.addHighscore("Robert", 488);
     }
 
     @Test
     public void testSaveHighscores() throws Exception {
-        Highscore highscore = new Highscore();
+        Highscore highscore = Highscore.getInstance();
         highscore.saveHighscores();
         highscore.toString();
     }
     
     @Test
     public void testHighscoresToString() {
-        Highscore highscore = new Highscore();
+        Highscore highscore = Highscore.getInstance();
         highscore.toString();
     }
 }

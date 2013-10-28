@@ -13,8 +13,18 @@ public class Highscore {
 
     private String pathToHighscoreFile = "src/Resources/highscores.txt";
     private ArrayList<HighscoreEntry> highscores;
+
+    private static Highscore instance;
+
+    public static Highscore getInstance() {
+        if (instance == null) {
+            instance = new Highscore();
+        }
+
+        return instance;
+    }
     
-    public Highscore() {
+    private Highscore() {
         highscores = new ArrayList<HighscoreEntry>();
         fillHighscoreList();
     }

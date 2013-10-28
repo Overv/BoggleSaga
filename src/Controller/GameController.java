@@ -1,13 +1,9 @@
 package Controller;
 
-import Model.Settings;
+import Model.*;
 import Model.Settings.*;
-import Model.Sound;
-import Model.Time;
 import View.EndFrame;
 import View.GameFrame;
-import Model.Game;
-import Model.StatisticsEntry;
 import sun.audio.AudioPlayer;
 
 import javax.swing.*;
@@ -75,18 +71,22 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
 
     @Override
     public void timesUp(){
+        // Add high score if player got points
+        if (gameModel.getCurrentScore() > 0) {
+            String s = (String) JOptionPane.showInputDialog(gameView, "Please enter your name if you'd like to add yourself to the highscore list:", "Highscore!", JOptionPane.PLAIN_MESSAGE, null, null, "");
+
+            if (s != null && s.trim().length() > 0) {
+                Highscore.getInstance().addHighscore(s.trim(), gameModel.getCurrentScore());
+            }
+        }
+
+        // Show end screen
         new EndFrame(gameModel);
 
         Sound.stopMusic();
 
         gameView.setVisible(false);
         gameView.dispose();
-
-        /*gameModel.printStatistics();
-        gameModel.printAchievements();
-        JOptionPane.showMessageDialog(null, "You found " + gameModel.getFoundWords().size() + " words with a total score of "
-                + gameModel.getCurrentScore() + "!\n" + "Your best word was: " + gameModel.getBestWord() + "!", "Game finished!", JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0);*/
     }
 
     @Override

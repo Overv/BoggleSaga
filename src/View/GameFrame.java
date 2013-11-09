@@ -4,6 +4,7 @@ import Model.DiceCoord;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.StrokeBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -59,36 +60,34 @@ public class GameFrame extends JFrame {
     }
 
     private void createLayout() {
-        // Use native look and feel (if this fails, we have bigger problems)
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {}
-
         // Create label displaying time left
         JLabel timeCaptionLabel = new JLabel("Time left");
         timeCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
-        timeCaptionLabel.setBorder(new EmptyBorder(10, 20, 0, 20));
-        timeCaptionLabel.setFont(new Font(timeCaptionLabel.getFont().getFontName(), Font.PLAIN, 25));
+        timeCaptionLabel.setBorder(new EmptyBorder(20, 20, 0, 20));
+        timeCaptionLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        timeCaptionLabel.setForeground(Color.decode("#555555"));
 
         timeLabel = new JLabel();
         timeLabel.setAlignmentX(CENTER_ALIGNMENT);
         timeLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
-        timeLabel.setFont(new Font(timeLabel.getFont().getFontName(), Font.PLAIN, 60));
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 60));
 
         // Create score label displaying current score
         JLabel scoreCaptionLabel = new JLabel("Score");
         scoreCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         scoreCaptionLabel.setBorder(new EmptyBorder(10, 20, 0, 20));
-        scoreCaptionLabel.setFont(new Font(timeCaptionLabel.getFont().getFontName(), Font.PLAIN, 25));
+        scoreCaptionLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        scoreCaptionLabel.setForeground(Color.decode("#555555"));
 
         scoreLabel = new JLabel();
         scoreLabel.setAlignmentX(CENTER_ALIGNMENT);
         scoreLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
-        scoreLabel.setFont(new Font(scoreLabel.getFont().getFontName(), Font.PLAIN, 60));
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 60));
 
         // Create container layout for info labels
         JPanel infoLabelContainer = new JPanel();
         infoLabelContainer.setLayout(new BoxLayout(infoLabelContainer, BoxLayout.PAGE_AXIS));
+        infoLabelContainer.setBackground(Color.decode("#111111"));
 
         infoLabelContainer.add(timeCaptionLabel);
         infoLabelContainer.add(timeLabel);
@@ -117,6 +116,7 @@ public class GameFrame extends JFrame {
         JPanel wordListContainer = new JPanel();
         wordListContainer.setLayout(new BoxLayout(wordListContainer, BoxLayout.PAGE_AXIS));
         wordListContainer.setBorder(new EmptyBorder(10, 20, 10, 10));
+        wordListContainer.setBackground(Color.decode("#0074CC"));
 
         wordListContainer.add(wordCaptionLabel);
         wordListContainer.add(wordListScroller);
@@ -130,13 +130,18 @@ public class GameFrame extends JFrame {
 
         JPanel diceGridContainer = new JPanel();
         diceGridContainer.setLayout(gridLayout);
-        diceGridContainer.setBorder(new EmptyBorder(10, 0, 10, 0));
+        diceGridContainer.setBorder(new EmptyBorder(20, 20, 20, 0));
+        diceGridContainer.setBackground(Color.decode("#0074CC"));
 
         // Create button for each dice
         for (int y = 0; y < gridWidth; y++) {
             for (int x = 0; x < gridHeight; x++) {
                 final JButton button = diceButtons[x][y] = new JButton();
                 button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 40));
+                button.setForeground(Color.WHITE);
+                button.setBorder(BorderFactory.createLineBorder(Color.decode("#00487F")));
+                button.setBackground(Color.decode("#00538E"));
+                button.setFocusPainted(false);
                 button.addMouseListener(createDiceListener(button, x, y));
                 diceGridContainer.add(button);
 

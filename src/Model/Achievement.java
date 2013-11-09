@@ -38,4 +38,8 @@ public class Achievement<T> {
     public String toString(){
         return "Achievement - n: " + name + "  v: " + realValue + "  f: " + flavourtext;
     }
+    
+    public void getImage(){
+    	
+    }
 }

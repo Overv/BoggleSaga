@@ -24,6 +24,7 @@ public class GameFrame extends JFrame {
     
     private JLabel timeLabel;
     private JLabel scoreLabel;
+    private JLabel wordPlaceholder;
     private DefaultListModel<String> wordListModel;
     private JList<String> wordList;
 
@@ -98,6 +99,12 @@ public class GameFrame extends JFrame {
         wordCaptionLabel.setFont(new Font("Arial Narrow", Font.PLAIN, 20));
         wordCaptionLabel.setForeground(Color.decode("#F4B701"));
 
+        wordPlaceholder = new JLabel("<html>Mark words by holding and<br />dragging from the first letter.</html>", SwingConstants.CENTER);
+        wordPlaceholder.setAlignmentX(CENTER_ALIGNMENT);
+        wordPlaceholder.setBorder(new EmptyBorder(15, 5, 5, 5));
+        wordPlaceholder.setFont(new Font("Arial", Font.PLAIN, 12));
+        wordPlaceholder.setForeground(Color.decode("#444444"));
+
         wordListModel = new DefaultListModel<String>();
 
         wordList = new JList<String>(wordListModel);
@@ -129,6 +136,7 @@ public class GameFrame extends JFrame {
         infoLabelContainer.add(scoreCaptionLabel);
         infoLabelContainer.add(scoreLabel);
         infoLabelContainer.add(wordCaptionLabel);
+        infoLabelContainer.add(wordPlaceholder);
         infoLabelContainer.add(wordListContainer);
 
         add(infoLabelContainer, BorderLayout.LINE_START);
@@ -268,6 +276,9 @@ public class GameFrame extends JFrame {
     }
 
     public void setWordsFound(ArrayList<String> words) {
+        wordPlaceholder.setVisible(words.size() == 0);
+        wordList.setVisible(words.size() > 0);
+
         wordListModel.clear();
 
         for (String word : words) {

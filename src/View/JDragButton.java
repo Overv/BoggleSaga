@@ -9,10 +9,14 @@ import java.awt.*;
 public class JDragButton extends JButton {
     public JDragButton() {
         super();
+
+        setFocusPainted(false);
     }
 
     public JDragButton(String caption) {
         super(caption);
+
+        setFocusPainted(false);
     }
 
     @Override

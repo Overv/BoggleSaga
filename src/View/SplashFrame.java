@@ -112,6 +112,7 @@ public class SplashFrame extends JFrame implements ActionListener {
         musicCheckbox.setBackground(Color.decode("#222222"));
         musicCheckbox.setForeground(Color.WHITE);
         musicCheckbox.setBorder(new EmptyBorder(10, 92, 5, 93));
+        musicCheckbox.setFocusPainted(false);
         musicCheckboxContainer.add(musicCheckbox);
 
         viewContainer.add(musicCheckboxContainer);
@@ -129,6 +130,7 @@ public class SplashFrame extends JFrame implements ActionListener {
         soundCheckbox.setBackground(Color.decode("#222222"));
         soundCheckbox.setForeground(Color.WHITE);
         soundCheckbox.setBorder(new EmptyBorder(5, 90, 10, 90));
+        soundCheckbox.setFocusPainted(false);
         soundCheckboxContainer.add(soundCheckbox);
 
         viewContainer.add(soundCheckboxContainer);

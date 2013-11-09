@@ -59,6 +59,11 @@ public class GameFrame extends JFrame {
     }
 
     private void createLayout() {
+        // Use native look and feel (if this fails, we have bigger problems)
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {}
+
         // Create label displaying time left
         JLabel timeCaptionLabel = new JLabel("Time left");
         timeCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);

@@ -24,13 +24,8 @@ public class SplashFrame extends JFrame implements ActionListener {
     private OnStartGameListener listener;
 
     public SplashFrame() {
-        // Use native look and feel (if this fails, we have bigger problems)
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {}
-
         // Initialize window properties
-        setSize(250, 325);
+        setSize(250, 330);
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Boggle Saga Inc.");
@@ -50,13 +45,15 @@ public class SplashFrame extends JFrame implements ActionListener {
     private void createLayout() {
         // Show views vertically
         JPanel viewContainer = new JPanel();
+        viewContainer.setBackground(Color.decode("#0074CC"));
         viewContainer.setLayout(new BoxLayout(viewContainer, BoxLayout.PAGE_AXIS));
 
         // Title label
         JLabel titleLabel = new JLabel("Boggle Saga Inc.");
         titleLabel.setAlignmentX(CENTER_ALIGNMENT);
         titleLabel.setBorder(new EmptyBorder(10, 0, 0, 0));
-        titleLabel.setFont(new Font(titleLabel.getFont().getFontName(), Font.BOLD, 25));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 26));
+        titleLabel.setForeground(Color.decode("#FFFFFF"));
         viewContainer.add(titleLabel);
 
         // Credits label
@@ -64,18 +61,22 @@ public class SplashFrame extends JFrame implements ActionListener {
         creditsLabel.setAlignmentX(CENTER_ALIGNMENT);
         creditsLabel.setBorder(new EmptyBorder(10, 0, 30, 0));
         creditsLabel.setFont(new Font(creditsLabel.getFont().getFontName(), Font.PLAIN, 10));
+        creditsLabel.setForeground(Color.decode("#12507F"));
         viewContainer.add(creditsLabel);
 
         // Normal boggle button
         JPanel boggleButtonContainer = new JPanel();
         boggleButtonContainer.setLayout(new BoxLayout(boggleButtonContainer, BoxLayout.PAGE_AXIS));
         boggleButtonContainer.setBorder(new EmptyBorder(0, 0, 5, 0));
+        boggleButtonContainer.setBackground(Color.decode("#0074CC"));
 
         boggleButton = new JButton("Boggle");
         boggleButton.addActionListener(this);
         boggleButton.setAlignmentX(CENTER_ALIGNMENT);
         boggleButton.setBorder(new EmptyBorder(10, 90, 10, 90));
         boggleButton.setFont(new Font(boggleButton.getFont().getFontName(), Font.PLAIN, 14));
+        boggleButton.setForeground(Color.WHITE);
+        boggleButton.setBackground(Color.decode("#00538E"));
         boggleButtonContainer.add(boggleButton);
 
         viewContainer.add(boggleButtonContainer);
@@ -84,12 +85,15 @@ public class SplashFrame extends JFrame implements ActionListener {
         JPanel bigBoggleButtonContainer = new JPanel();
         bigBoggleButtonContainer.setLayout(new BoxLayout(bigBoggleButtonContainer, BoxLayout.PAGE_AXIS));
         bigBoggleButtonContainer.setBorder(new EmptyBorder(0, 0, 5, 0));
+        bigBoggleButtonContainer.setBackground(Color.decode("#0074CC"));
 
         bigBoggleButton = new JButton("Big Boggle");
         bigBoggleButton.addActionListener(this);
         bigBoggleButton.setAlignmentX(CENTER_ALIGNMENT);
-        bigBoggleButton.setBorder(new EmptyBorder(10, 79, 10, 79));
+        bigBoggleButton.setBorder(new EmptyBorder(10, 77, 10, 76));
         bigBoggleButton.setFont(new Font(bigBoggleButton.getFont().getFontName(), Font.PLAIN, 14));
+        bigBoggleButton.setForeground(Color.WHITE);
+        bigBoggleButton.setBackground(Color.decode("#00538E"));
         bigBoggleButtonContainer.add(bigBoggleButton);
 
         viewContainer.add(bigBoggleButtonContainer);
@@ -98,12 +102,15 @@ public class SplashFrame extends JFrame implements ActionListener {
         JPanel musicCheckboxContainer = new JPanel();
         musicCheckboxContainer.setLayout(new BoxLayout(musicCheckboxContainer, BoxLayout.PAGE_AXIS));
         musicCheckboxContainer.setBorder(new EmptyBorder(30, 0, 0, 0));
+        musicCheckboxContainer.setBackground(Color.decode("#0074CC"));
 
         musicCheckbox = new JCheckBox("Music");
         musicCheckbox.setSelected(Settings.isMusicEnabled());
         musicCheckbox.addActionListener(this);
         musicCheckbox.setAlignmentX(CENTER_ALIGNMENT);
         musicCheckbox.setFont(new Font(musicCheckbox.getFont().getFontName(), Font.BOLD, 14));
+        musicCheckbox.setBackground(Color.decode("#0074CC"));
+        musicCheckbox.setForeground(Color.WHITE);
         musicCheckboxContainer.add(musicCheckbox);
 
         viewContainer.add(musicCheckboxContainer);
@@ -118,6 +125,8 @@ public class SplashFrame extends JFrame implements ActionListener {
         soundCheckbox.addActionListener(this);
         soundCheckbox.setAlignmentX(CENTER_ALIGNMENT);
         soundCheckbox.setFont(new Font(soundCheckbox.getFont().getFontName(), Font.BOLD, 14));
+        soundCheckbox.setBackground(Color.decode("#0074CC"));
+        soundCheckbox.setForeground(Color.WHITE);
         soundCheckboxContainer.add(soundCheckbox);
 
         viewContainer.add(soundCheckboxContainer);

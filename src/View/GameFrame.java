@@ -46,7 +46,7 @@ public class GameFrame extends JFrame {
         this.gridHeight = gridHeight;
 
         // Initialize window properties
-        setSize(800, 500);
+        setSize(650, 500);
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Boggle Saga Inc.");
@@ -64,43 +64,39 @@ public class GameFrame extends JFrame {
         JLabel timeCaptionLabel = new JLabel("Time left");
         timeCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         timeCaptionLabel.setBorder(new EmptyBorder(20, 20, 0, 20));
-        timeCaptionLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-        timeCaptionLabel.setForeground(Color.decode("#555555"));
+        timeCaptionLabel.setFont(new Font("Arial Narrow", Font.PLAIN, 20));
+        timeCaptionLabel.setForeground(Color.decode("#D72828"));
 
         timeLabel = new JLabel();
         timeLabel.setAlignmentX(CENTER_ALIGNMENT);
         timeLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
         timeLabel.setFont(new Font("Arial", Font.BOLD, 60));
+        timeLabel.setForeground(Color.decode("#D72828"));
 
         // Create score label displaying current score
         JLabel scoreCaptionLabel = new JLabel("Score");
         scoreCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         scoreCaptionLabel.setBorder(new EmptyBorder(10, 20, 0, 20));
-        scoreCaptionLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-        scoreCaptionLabel.setForeground(Color.decode("#555555"));
+        scoreCaptionLabel.setFont(new Font("Arial Narrow", Font.PLAIN, 20));
+        scoreCaptionLabel.setForeground(Color.decode("#56A739"));
 
         scoreLabel = new JLabel();
         scoreLabel.setAlignmentX(CENTER_ALIGNMENT);
         scoreLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 60));
+        scoreLabel.setForeground(Color.decode("#56A739"));
 
         // Create container layout for info labels
         JPanel infoLabelContainer = new JPanel();
         infoLabelContainer.setLayout(new BoxLayout(infoLabelContainer, BoxLayout.PAGE_AXIS));
         infoLabelContainer.setBackground(Color.decode("#111111"));
 
-        infoLabelContainer.add(timeCaptionLabel);
-        infoLabelContainer.add(timeLabel);
-        infoLabelContainer.add(scoreCaptionLabel);
-        infoLabelContainer.add(scoreLabel);
-
-        add(infoLabelContainer, BorderLayout.LINE_START);
-
         // Create list containing guessed words
         JLabel wordCaptionLabel = new JLabel("Words found");
         wordCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
-        wordCaptionLabel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        wordCaptionLabel.setFont(new Font(wordCaptionLabel.getFont().getFontName(), Font.PLAIN, 25));
+        wordCaptionLabel.setBorder(new EmptyBorder(10, 20, 0, 20));
+        wordCaptionLabel.setFont(new Font("Arial Narrow", Font.PLAIN, 20));
+        wordCaptionLabel.setForeground(Color.decode("#F4B701"));
 
         wordListModel = new DefaultListModel<String>();
 
@@ -108,20 +104,34 @@ public class GameFrame extends JFrame {
         wordList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         wordList.setLayoutOrientation(JList.VERTICAL);
         wordList.setVisibleRowCount(-1);
-        wordList.setFont(new Font(wordList.getFont().getFontName(), Font.PLAIN, 20));
+        wordList.setFont(new Font("Arial", Font.BOLD, 16));
+        wordList.setCellRenderer(new DefaultListCellRenderer(){
+            public int getHorizontalAlignment() {
+                return CENTER;
+            }
+        });
+        wordList.setBackground(Color.decode("#111111"));
+        wordList.setForeground(Color.decode("#F4B701"));
 
         JScrollPane wordListScroller = new JScrollPane(wordList);
         wordListScroller.setPreferredSize(new Dimension(160, 800));
+        wordListScroller.setBorder(BorderFactory.createEmptyBorder());
 
         JPanel wordListContainer = new JPanel();
         wordListContainer.setLayout(new BoxLayout(wordListContainer, BoxLayout.PAGE_AXIS));
         wordListContainer.setBorder(new EmptyBorder(10, 20, 10, 10));
-        wordListContainer.setBackground(Color.decode("#0074CC"));
+        wordListContainer.setBackground(Color.decode("#111111"));
 
-        wordListContainer.add(wordCaptionLabel);
         wordListContainer.add(wordListScroller);
 
-        add(wordListContainer, BorderLayout.LINE_END);
+        infoLabelContainer.add(timeCaptionLabel);
+        infoLabelContainer.add(timeLabel);
+        infoLabelContainer.add(scoreCaptionLabel);
+        infoLabelContainer.add(scoreLabel);
+        infoLabelContainer.add(wordCaptionLabel);
+        infoLabelContainer.add(wordListContainer);
+
+        add(infoLabelContainer, BorderLayout.LINE_START);
 
         // Add grid with widthxheight dices
         GridLayout gridLayout = new GridLayout(gridHeight, gridWidth);
@@ -130,13 +140,13 @@ public class GameFrame extends JFrame {
 
         JPanel diceGridContainer = new JPanel();
         diceGridContainer.setLayout(gridLayout);
-        diceGridContainer.setBorder(new EmptyBorder(20, 20, 20, 0));
+        diceGridContainer.setBorder(new EmptyBorder(30, 30, 30, 30));
         diceGridContainer.setBackground(Color.decode("#0074CC"));
 
         // Create button for each dice
         for (int y = 0; y < gridWidth; y++) {
             for (int x = 0; x < gridHeight; x++) {
-                final JButton button = diceButtons[x][y] = new JButton();
+                final JButton button = diceButtons[x][y] = new JDragButton();
                 button.setFont(new Font(button.getFont().getFontName(), Font.PLAIN, 40));
                 button.setForeground(Color.WHITE);
                 button.setBorder(BorderFactory.createLineBorder(Color.decode("#00487F")));
@@ -166,7 +176,7 @@ public class GameFrame extends JFrame {
                 draggingWord = true;
 
                 diceDragged.add(new DiceCoord(x, y));
-                button.setForeground(Color.GREEN);
+                button.setBackground(Color.decode("#00253F"));
             }
 
             @Override
@@ -175,7 +185,7 @@ public class GameFrame extends JFrame {
 
                 // Reset colors of dices
                 for (DiceCoord coord : diceDragged) {
-                    diceButtons[coord.x][coord.y].setForeground(defaultTextColor);
+                    diceButtons[coord.x][coord.y].setBackground(Color.decode("#00538E"));
                 }
 
                 // Check if the selection followed the rules of the game
@@ -194,7 +204,7 @@ public class GameFrame extends JFrame {
             public void mouseEntered(MouseEvent e) {
                 if (draggingWord) {
                     diceDragged.add(new DiceCoord(x, y));
-                    button.setForeground(Color.GREEN);
+                    button.setBackground(Color.decode("#00253F"));
                 }
             }
         };
@@ -262,7 +272,7 @@ public class GameFrame extends JFrame {
 
         for (String word : words) {
             // Space for left padding improves layout
-            wordListModel.addElement(" " + word.substring(0, 1).toUpperCase() + word.substring(1));
+            wordListModel.addElement(word.substring(0, 1).toUpperCase() + word.substring(1));
         }
     }
 

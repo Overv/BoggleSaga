@@ -8,6 +8,7 @@ import Model.HighscoreEntry;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -68,21 +69,15 @@ public class EndFrame extends JFrame {
         DefaultListModel<String> wordListModel = new DefaultListModel<String>();
 
         for (String word : game.findAllWords()) {
-            if (game.getFoundWords().contains(word)) {
-                wordListModel.addElement(" " + word.toUpperCase());
-            } else {
-                wordListModel.addElement(" " + word);
-            }
+            wordListModel.addElement(word);
         }
 
         JList<String> wordList = new JList<String>(wordListModel);
         wordList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         wordList.setLayoutOrientation(JList.VERTICAL);
         wordList.setVisibleRowCount(-1);
-        wordList.setFont(new Font("Arial", Font.PLAIN, 20));
-        wordList.setCellRenderer(new NoSelectListRenderer());
+        wordList.setCellRenderer(new CompleteWordListRenderer(game.getFoundWords()));
         wordList.setBackground(Color.decode("#1a1a1a"));
-        wordList.setForeground(Color.decode("#F4B701"));
 
         JScrollPane wordListScroller = new JScrollPane(wordList);
         wordListScroller.setPreferredSize(new Dimension(160, 800));
@@ -118,7 +113,7 @@ public class EndFrame extends JFrame {
         highscoreList.setFont(new Font("Arial", Font.PLAIN, 20));
         highscoreList.setCellRenderer(new NoSelectListRenderer());
         highscoreList.setBackground(Color.decode("#1a1a1a"));
-        highscoreList.setForeground(Color.decode("#D72828"));
+        highscoreList.setForeground(Color.decode("#F4B701"));
 
         JScrollPane highscoreListScroller = new JScrollPane(highscoreList);
         highscoreListScroller.setPreferredSize(new Dimension(160, 800));
@@ -154,7 +149,7 @@ public class EndFrame extends JFrame {
         achievementList.setFont(new Font(achievementList.getFont().getFontName(), Font.PLAIN, 11));
         achievementList.setCellRenderer(new NoSelectListRenderer());
         achievementList.setBackground(Color.decode("#1a1a1a"));
-        achievementList.setForeground(Color.decode("#56A739"));
+        achievementList.setForeground(Color.decode("#F4B701"));
 
         JScrollPane achievementListScroller = new JScrollPane(achievementList);
         achievementListScroller.setPreferredSize(new Dimension(160, 800));

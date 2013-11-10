@@ -47,9 +47,7 @@ public class GameFrame extends JFrame {
         this.gridHeight = gridHeight;
 
         // Initialize window properties
-        setSize(650, 500);
         setResizable(false);
-        setLocationRelativeTo(null);
         setTitle("Boggle Saga Inc.");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -57,10 +55,14 @@ public class GameFrame extends JFrame {
         createLayout();
 
         // Show window
+        pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
     private void createLayout() {
+        setPreferredSize(new Dimension(650, 500));
+
         // Create label displaying time left
         JLabel timeCaptionLabel = new JLabel("Time left");
         timeCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);

@@ -1,22 +1,14 @@
 package View;
 
 import Model.Settings;
+import com.sun.corba.se.impl.orb.ORBVersionImpl;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Overv
- * Date: 28-10-13
- * Time: 0:03
- * To change this template use File | Settings | File Templates.
- */
 public class SplashFrame extends JFrame implements ActionListener {
     private JCheckBox musicCheckbox, soundCheckbox;
     private JButton boggleButton, bigBoggleButton;
@@ -25,9 +17,7 @@ public class SplashFrame extends JFrame implements ActionListener {
 
     public SplashFrame() {
         // Initialize window properties
-        setSize(250, 377);
         setResizable(false);
-        setLocationRelativeTo(null);
         setTitle("Boggle Saga Inc.");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -35,6 +25,8 @@ public class SplashFrame extends JFrame implements ActionListener {
         createLayout();
 
         // Show window
+        pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -45,6 +37,7 @@ public class SplashFrame extends JFrame implements ActionListener {
     private void createLayout() {
         // Show views vertically
         JPanel viewContainer = new JPanel();
+        viewContainer.setPreferredSize(new Dimension(244, 345));
         viewContainer.setBackground(Color.decode("#1a1a1a"));
         viewContainer.setLayout(new BoxLayout(viewContainer, BoxLayout.PAGE_AXIS));
 
@@ -52,7 +45,7 @@ public class SplashFrame extends JFrame implements ActionListener {
         JLabel titleLabel = new JLabel("Boggle Saga Inc.");
         titleLabel.setAlignmentX(CENTER_ALIGNMENT);
         titleLabel.setBorder(new EmptyBorder(10, 0, 0, 0));
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 27));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setForeground(Color.decode("#33B5E5"));
         viewContainer.add(titleLabel);
 

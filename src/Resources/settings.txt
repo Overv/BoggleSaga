@@ -1,3 +1,0 @@
-sound ON
-music ON
-gametype BIGBOGGLE

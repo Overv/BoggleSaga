@@ -7,3 +7,4 @@ workspace.xml
 *.jar
 *.MF
 src/Resources/highscores.txt
+src/Resources/settings.txt

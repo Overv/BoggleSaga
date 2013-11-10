@@ -36,6 +36,13 @@ public class Highscore {
     
     public void fillHighscoreList() {
         File f = new File(pathToHighscoreFile);
+        if(!f.exists()){
+        	try {
+				f.createNewFile();
+			} catch (IOException e) {
+				System.err.println("Could not create highscore file.");
+			}
+        }
         BufferedReader br = null;
         try {
             String sCurrentLine;

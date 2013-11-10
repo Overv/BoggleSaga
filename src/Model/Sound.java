@@ -18,7 +18,8 @@ public class Sound {
     public static String FOUND_WORD_SOUND = "src/Resources/Sounds/found_word.wav";
     public static String ACHIEVEMENT_SOUND = "src/Resources/Sounds/achievement.wav";
     public static String GAME_SOUND = "src/Resources/Sounds/game.wav";
-
+    public static String NEW_ACHIEVEMENT_SOUND = "src/Resources/Sounds/new_achievement.wav";
+    public static String HOTSTREAK_SOUND = "src/Resources/Sounds/hotstreak.wav";
     private static InputStream musicStream;
 
     public static void playFoundWordSound() {
@@ -31,6 +32,14 @@ public class Sound {
 
     public static void playGameSound() {
         playSound(GAME_SOUND);
+    }
+    
+    public static void playNewAchievementSound() {
+        playSound(NEW_ACHIEVEMENT_SOUND);
+    }
+    
+    public static void playHotstreakSound() {
+        playSound(HOTSTREAK_SOUND);
     }
     
     private static void playSound(String audioFileIn) {

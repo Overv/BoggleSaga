@@ -46,6 +46,7 @@ public class GameFrame extends JFrame implements AchievementListener {
     private Timer hotstreakTimer;
     
     private JLabel achievementLabel;
+    private JLabel achievementIconLabel;
     private ArrayList<Achievement> achievementsLeft;
     private Timer achievementTimer;
 
@@ -76,7 +77,7 @@ public class GameFrame extends JFrame implements AchievementListener {
     }
 
     private void createLayout() {
-        setPreferredSize(new Dimension(650, 500));
+        setPreferredSize(new Dimension(900, 500));
 
         // Create label displaying time left
         JLabel timeCaptionLabel = new JLabel("Time left");
@@ -108,7 +109,37 @@ public class GameFrame extends JFrame implements AchievementListener {
         JPanel infoLabelContainer = new JPanel();
         infoLabelContainer.setLayout(new BoxLayout(infoLabelContainer, BoxLayout.PAGE_AXIS));
         infoLabelContainer.setBackground(Color.decode("#111111"));
+        
+        hotstreakLabel = new JLabel();
+        hotstreakLabel.setAlignmentX(CENTER_ALIGNMENT);
+        hotstreakLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
+        hotstreakLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        hotstreakLabel.setForeground(Color.decode("#D72828"));
+        
+        achievementIconLabel = new JLabel();
+        achievementIconLabel.setAlignmentX(CENTER_ALIGNMENT);
+        achievementIconLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
+        
+        achievementLabel = new JLabel();
+        achievementLabel.setAlignmentX(CENTER_ALIGNMENT);
+        achievementLabel.setAlignmentY(TOP_ALIGNMENT);
+        achievementLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
+        achievementLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        achievementLabel.setForeground(Color.decode("#0074CC"));
+        achievementLabel.setPreferredSize(new Dimension(200,800));
+        
 
+        infoLabelContainer.add(timeCaptionLabel);
+        infoLabelContainer.add(timeLabel);
+        infoLabelContainer.add(scoreCaptionLabel);
+        infoLabelContainer.add(scoreLabel);
+        infoLabelContainer.add(achievementIconLabel);
+        infoLabelContainer.add(achievementLabel);
+        infoLabelContainer.add(hotstreakLabel);
+
+        add(infoLabelContainer, BorderLayout.LINE_START);
+
+        
         // Create list containing guessed words
         JLabel wordCaptionLabel = new JLabel("Words found");
         wordCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -134,7 +165,7 @@ public class GameFrame extends JFrame implements AchievementListener {
         wordList.setForeground(Color.decode("#F4B701"));
 
         JScrollPane wordListScroller = new JScrollPane(wordList);
-        wordListScroller.setPreferredSize(new Dimension(160, 800));
+        wordListScroller.setPreferredSize(new Dimension(200, 800));
         wordListScroller.setBorder(BorderFactory.createEmptyBorder());
 
         JPanel wordListContainer = new JPanel();
@@ -144,30 +175,17 @@ public class GameFrame extends JFrame implements AchievementListener {
 
         wordListContainer.add(wordListScroller);
         
-        hotstreakLabel = new JLabel();
-        hotstreakLabel.setAlignmentX(CENTER_ALIGNMENT);
-        hotstreakLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
-        hotstreakLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        hotstreakLabel.setForeground(Color.decode("#D72828"));
+        // Create container layout for wordlist
+        JPanel wordLabelContainer = new JPanel();
+        wordLabelContainer.setLayout(new BoxLayout(wordLabelContainer, BoxLayout.PAGE_AXIS));
+        wordLabelContainer.setBackground(Color.decode("#111111"));
         
-        achievementLabel = new JLabel();
-        achievementLabel.setAlignmentX(CENTER_ALIGNMENT);
-        achievementLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
-        achievementLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        achievementLabel.setForeground(Color.decode("#0074CC"));
-
-        infoLabelContainer.add(timeCaptionLabel);
-        infoLabelContainer.add(timeLabel);
-        infoLabelContainer.add(scoreCaptionLabel);
-        infoLabelContainer.add(scoreLabel);
-        infoLabelContainer.add(wordCaptionLabel);
-        infoLabelContainer.add(wordPlaceholder);
-        infoLabelContainer.add(wordListContainer);
-        infoLabelContainer.add(achievementLabel);
-        infoLabelContainer.add(hotstreakLabel);
-
-        add(infoLabelContainer, BorderLayout.LINE_START);
-
+        wordLabelContainer.add(wordCaptionLabel);
+        wordLabelContainer.add(wordPlaceholder);
+        wordLabelContainer.add(wordListContainer);
+        
+        add(wordLabelContainer, BorderLayout.EAST);
+        
         // Add grid with widthxheight dices
         GridLayout gridLayout = new GridLayout(gridHeight, gridWidth);
         gridLayout.setHgap(30);
@@ -353,13 +371,15 @@ public class GameFrame extends JFrame implements AchievementListener {
         public void run(){
             if(!achievementsLeft.isEmpty()){
                 Achievement a = achievementsLeft.get(0);
-                achievementLabel.setIcon(new ImageIcon(a.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH)));
+                achievementIconLabel.setIcon(new ImageIcon(a.getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH)));
                 achievementLabel.setText(a.getName());
+                achievementLabel.setForeground(Color.decode("#0074CC"));
                 achievementsLeft.remove(a);
             }
             else{
-                achievementLabel.setIcon(null);
-                achievementLabel.setText("");
+                achievementIconLabel.setIcon(null);
+                achievementLabel.setText("No achievement");
+                achievementLabel.setForeground(Color.decode("#444444"));
                 achievementTimer.cancel();
                 achievementTimer.purge();
                 achievementTimer = null;

@@ -33,7 +33,7 @@ public class AchievementManager implements TimeListener {
 		achievements.add(new Achievement("Made 5 attempts.", false, "src/Resources/Achievements/5.png", new AchConXWordsInRange(statistics, 5, 6)));
 		achievements.add(new Achievement("Made 10 attempts.", false, "src/Resources/Achievements/10.png", new AchConXWordsInRange(statistics, 10, 11)));
 		achievements.add(new Achievement("Made 15 attempts.", false, "src/Resources/Achievements/15.png", new AchConXWordsInRange(statistics, 15, 16)));
-		
+		achievements.add(new Achievement("First word!", false, "src/Resources/Achievements/first.png", new AchConXWordsInRange(statistics, 1, 2)));
 		//general endgame achievements
 		achievements.add(new Achievement("Try harder!", true, "src/Resources/Achievements/0star.png", new AchConXWordsInRange(statistics, 0, 1)));
 		achievements.add(new Achievement("Horrible player!", true, "src/Resources/Achievements/1star.png", new AchConCorrectWordBetweenRatios(statistics, 0.0, 0.5)));
@@ -124,19 +124,25 @@ public class AchievementManager implements TimeListener {
 		boolean stopHotstreak = starttimeHotstreak - timeLeft > HOTSTREAKLENGTH && !enableHotstreak;
 		
 		
+		
 		//call listeners
 		for(AchievementListener listener : achievementListeners){
 			listener.showAchievement(newAchievements);
 			
 			if(enableHotstreak && !inHotstreak){
-				listener.startHotstreak();
-				inHotstreak = true;
-			}
-			else if(stopHotstreak && inHotstreak){
-			    listener.stopHotstreak();
-			    inHotstreak = false;
-			}
+	            listener.startHotstreak();
+	        }
+	        else if(stopHotstreak && inHotstreak){
+	            listener.stopHotstreak();
+	        }
 		}
+		
+		if(enableHotstreak && !inHotstreak){
+            inHotstreak = true;
+        }
+        else if(stopHotstreak && inHotstreak){
+            inHotstreak = false;
+        }
 		
 	}
 }

@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.ArrayList;
+
 import Model.*;
 import Model.Settings.*;
 import Model.Achievements.*;
@@ -15,7 +17,7 @@ import javax.swing.*;
  * Date: 18/10/13
  * Time: 08:39
  */
-public class GameController implements GameFrame.OnWordListener, Time.TimeListener {
+public class GameController implements GameFrame.OnWordListener, Time.TimeListener, AchievementListener {
     GameFrame gameView;
     Game gameModel;
 
@@ -35,6 +37,7 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
         this.gameView.setScore(0);
         gameModel.addTimeListener(this);
         gameModel.addAchievementListener(gameView);
+        gameModel.addAchievementListener(this);
     }
 
     public void startGame(){
@@ -94,5 +97,26 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
     @Override
     public void onTimePassed(int timeLeft){
         gameView.setTimeLeft(timeLeft);
+    }
+
+    @Override
+    public void showAchievement(ArrayList<Achievement> achievements) {
+        if(!achievements.isEmpty() && Settings.isSoundEnabled()){
+            Sound.playNewAchievementSound();
+        }
+    }
+
+    @Override
+    public void startHotstreak() {
+        if(Settings.isSoundEnabled()){
+            Sound.playHotstreakSound();
+        }
+        
+    }
+
+    @Override
+    public void stopHotstreak() {
+        // TODO Auto-generated method stub
+        
     }
 }

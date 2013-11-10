@@ -17,10 +17,10 @@ public class StatisticsEntry {
     // time is currently recorded as the time interval it occured in. So if it occured after
     // 10,5 seconds from start of game. and gamelength is 60 seconds, then time will have the value
     // 60 - 10 = 50
-    int time;
-    String word;
-    boolean wordCorrect;
-    GameType gametype;
+    private int time;
+    private String word;
+    private boolean wordCorrect;
+    private GameType gametype;
 
     public StatisticsEntry(int time, String word, boolean wordCorrect, GameType gametype){
         this.time = time;

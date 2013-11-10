@@ -17,10 +17,18 @@ public class Achievement{
     private String name;
     private boolean achieved;
     private BufferedImage img;
+    private boolean isEndgameCondition;
+    private AchievementCondition condition;
     
-    protected Achievement(String name, String imgPath){
+    protected Achievement(String name, boolean isEndgameCondition, String imgPath, AchievementCondition condition){
         this.name = name;
         this.achieved = false;
+        this.isEndgameCondition = isEndgameCondition;
+        this.condition = condition;
+        
+        if(imgPath == null){
+        	imgPath = "";
+        }
         
         //load image
         try {
@@ -28,7 +36,7 @@ public class Achievement{
 		} catch (IOException e) {
 			System.err.println("Could not load image: " + imgPath);
 			//empty image
-			img = new BufferedImage(0,0,BufferedImage.TYPE_INT_RGB);
+			img = new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
 		}
     }
 
@@ -38,7 +46,7 @@ public class Achievement{
     }
     
     protected boolean calculate(){
-    	achieved = true;
+    	achieved = condition.calculate();
     	return achieved;
     }
     
@@ -50,5 +58,9 @@ public class Achievement{
 
     public BufferedImage getImage(){
     	return img;
+    }
+    
+    public boolean isEndgameCondition(){
+        return isEndgameCondition;
     }
 }

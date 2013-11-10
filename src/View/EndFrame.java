@@ -36,14 +36,14 @@ public class EndFrame extends JFrame {
         setPreferredSize(new Dimension(650, 500));
 
         // Add overview of performance at top
-        JLabel overviewLabel = new JLabel("<html>Time's up! You found <b>" + game.getFoundWords().size() + " words</b> with a total value of <b>" + game.getCurrentScore() + " points</b>!</html>");
+        JLabel overviewLabel = new JLabel("<html>Time's up! You found <font color=\"#F4B701\"><b>" + game.getFoundWords().size() + " words</b></font> with a total value of <font color=\"#56A739\"><b>" + game.getCurrentScore() + " points</b></font>!</html>");
         overviewLabel.setAlignmentX(CENTER_ALIGNMENT);
-        overviewLabel.setBorder(new EmptyBorder(30, 30, 30, 30));
+        overviewLabel.setBorder(new EmptyBorder(30, 0, 30, 0));
         overviewLabel.setFont(new Font("Arial", Font.PLAIN, 21));
-        overviewLabel.setForeground(Color.decode("#56A739"));
+        overviewLabel.setForeground(Color.decode("#ffffff"));
 
         JPanel overviewLabelContainer = new JPanel();
-        overviewLabelContainer.setBackground(Color.decode("#1a1a1a"));
+        overviewLabelContainer.setBackground(Color.decode("#222222"));
 
         overviewLabelContainer.add(overviewLabel, BorderLayout.CENTER);
 
@@ -55,7 +55,7 @@ public class EndFrame extends JFrame {
 
         JPanel gridContainer = new JPanel();
         gridContainer.setLayout(gridLayout);
-        gridContainer.setBorder(new EmptyBorder(0, 0, 0, 0));
+        gridContainer.setBorder(new EmptyBorder(20, 0, 20, 0));
         gridContainer.setBackground(Color.decode("#1a1a1a"));
 
         // Add total words list
@@ -63,7 +63,7 @@ public class EndFrame extends JFrame {
         wordCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         wordCaptionLabel.setBorder(new EmptyBorder(0, 10, 10, 10));
         wordCaptionLabel.setFont(new Font(wordCaptionLabel.getFont().getFontName(), Font.PLAIN, 20));
-        wordCaptionLabel.setForeground(Color.WHITE);
+        wordCaptionLabel.setForeground(Color.decode("#eeeeee"));
 
         DefaultListModel<String> wordListModel = new DefaultListModel<String>();
 
@@ -79,10 +79,10 @@ public class EndFrame extends JFrame {
         wordList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         wordList.setLayoutOrientation(JList.VERTICAL);
         wordList.setVisibleRowCount(-1);
-        wordList.setFont(new Font(wordList.getFont().getFontName(), Font.PLAIN, 20));
+        wordList.setFont(new Font("Arial", Font.PLAIN, 20));
         wordList.setCellRenderer(new NoSelectListRenderer());
         wordList.setBackground(Color.decode("#1a1a1a"));
-        wordList.setForeground(Color.decode("#D72828"));
+        wordList.setForeground(Color.decode("#F4B701"));
 
         JScrollPane wordListScroller = new JScrollPane(wordList);
         wordListScroller.setPreferredSize(new Dimension(160, 800));
@@ -102,8 +102,8 @@ public class EndFrame extends JFrame {
         JLabel highscoreCaptionLabel = new JLabel("Highscores");
         highscoreCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         highscoreCaptionLabel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        highscoreCaptionLabel.setFont(new Font(highscoreCaptionLabel.getFont().getFontName(), Font.PLAIN, 20));
-        highscoreCaptionLabel.setForeground(Color.WHITE);
+        highscoreCaptionLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        highscoreCaptionLabel.setForeground(Color.decode("#eeeeee"));
 
         DefaultListModel<String> highscoreListModel = new DefaultListModel<String>();
 
@@ -115,10 +115,10 @@ public class EndFrame extends JFrame {
         highscoreList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         highscoreList.setLayoutOrientation(JList.VERTICAL);
         highscoreList.setVisibleRowCount(-1);
-        highscoreList.setFont(new Font(highscoreList.getFont().getFontName(), Font.PLAIN, 20));
+        highscoreList.setFont(new Font("Arial", Font.PLAIN, 20));
         highscoreList.setCellRenderer(new NoSelectListRenderer());
         highscoreList.setBackground(Color.decode("#1a1a1a"));
-        highscoreList.setForeground(Color.decode("#F4B701"));
+        highscoreList.setForeground(Color.decode("#D72828"));
 
         JScrollPane highscoreListScroller = new JScrollPane(highscoreList);
         highscoreListScroller.setPreferredSize(new Dimension(160, 800));
@@ -139,7 +139,7 @@ public class EndFrame extends JFrame {
         achievementCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         achievementCaptionLabel.setBorder(new EmptyBorder(0, 10, 10, 10));
         achievementCaptionLabel.setFont(new Font(achievementCaptionLabel.getFont().getFontName(), Font.PLAIN, 20));
-        achievementCaptionLabel.setForeground(Color.WHITE);
+        achievementCaptionLabel.setForeground(Color.decode("#eeeeee"));
 
         DefaultListModel<String> achievementListModel = new DefaultListModel<String>();
 
@@ -154,7 +154,7 @@ public class EndFrame extends JFrame {
         achievementList.setFont(new Font(achievementList.getFont().getFontName(), Font.PLAIN, 11));
         achievementList.setCellRenderer(new NoSelectListRenderer());
         achievementList.setBackground(Color.decode("#1a1a1a"));
-        achievementList.setForeground(Color.decode("#F4B701"));
+        achievementList.setForeground(Color.decode("#56A739"));
 
         JScrollPane achievementListScroller = new JScrollPane(achievementList);
         achievementListScroller.setPreferredSize(new Dimension(160, 800));

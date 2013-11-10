@@ -50,7 +50,7 @@ public class SplashFrame extends JFrame implements ActionListener {
         viewContainer.add(titleLabel);
 
         // Credits label
-        JLabel creditsLabel = new JLabel("<html>Alexander Overvoorde<br>Robert Carosi<br>René van den Berg</html>", SwingConstants.CENTER);
+        JLabel creditsLabel = new JLabel("<html>Alexander Overvoorde<br>Robert Carosi<br>RenÃ© van den Berg</html>", SwingConstants.CENTER);
         creditsLabel.setAlignmentX(CENTER_ALIGNMENT);
         creditsLabel.setBorder(new EmptyBorder(10, 0, 50, 0));
         creditsLabel.setFont(new Font("Arial", Font.PLAIN, 10));

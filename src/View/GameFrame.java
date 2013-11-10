@@ -125,7 +125,7 @@ public class GameFrame extends JFrame implements AchievementListener {
         achievementLabel.setAlignmentY(TOP_ALIGNMENT);
         achievementLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
         achievementLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-        achievementLabel.setForeground(Color.decode("#0074CC"));
+        achievementLabel.setForeground(Color.decode("#EEEEEE"));
         achievementLabel.setPreferredSize(new Dimension(200,800));
         
 
@@ -177,6 +177,7 @@ public class GameFrame extends JFrame implements AchievementListener {
         
         // Create container layout for wordlist
         JPanel wordLabelContainer = new JPanel();
+        wordLabelContainer.setPreferredSize(new Dimension(200, 500));
         wordLabelContainer.setLayout(new BoxLayout(wordLabelContainer, BoxLayout.PAGE_AXIS));
         wordLabelContainer.setBackground(Color.decode("#111111"));
         

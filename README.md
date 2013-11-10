@@ -1,8 +1,8 @@
 Boggle Saga
 ===========
 
-This is a Java implementation of the classic 4x4 Boggle Saga game created for
-the Software Engineering Methods subject at the Delft University of Technology.
+This is a Java implementation of the classic 4x4 Boggle game created for the
+Software Engineering Methods subject at the Delft University of Technology.
 
 Developers
 ----------

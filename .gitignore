@@ -5,5 +5,5 @@ workspace.xml
 *.iml
 *.iws
 *.jar
-res/Resources/highscores.txt
-res/META-INF/*
+*.MF
+src/Resources/highscores.txt

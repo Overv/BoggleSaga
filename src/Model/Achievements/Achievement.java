@@ -36,7 +36,7 @@ public class Achievement{
 		} catch (IOException e) {
 			System.err.println("Could not load image: " + imgPath);
 			//empty image
-			img = new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB);
+			img = new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB);
 		}
     }
 

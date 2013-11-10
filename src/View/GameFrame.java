@@ -305,12 +305,10 @@ public class GameFrame extends JFrame implements AchievementListener {
 
 	@Override
 	public void startHotstreak() {
-		System.out.println("started hotstreak");
 		
 	}
 
     @Override
     public void stopHotstreak() {
-        System.out.println("Stopped hotstreak");
     }
 }

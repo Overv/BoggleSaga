@@ -6,6 +6,8 @@ public class AchConCorrectWordBetweenRatios extends AchievementCondition {
     
     public AchConCorrectWordBetweenRatios(Statistics statistics, double lowerratio, double upperratio){
         super(statistics);
+        this.lowerratio = lowerratio;
+        this.upperratio = upperratio;
     }
 
     @Override

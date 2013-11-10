@@ -45,7 +45,7 @@ public class AchievementManager implements TimeListener {
 		
 		//bigboggle achievements
 		if(this.gametype == GameType.BIGBOGGLE){
-		    achievements.add(new Achievement("Made 20 attempts.", false, "src/Resources/Achievements/20star.png", new AchConXWordsInRange(statistics, 20, 21)));
+		    achievements.add(new Achievement("Made 20 attempts.", false, "src/Resources/Achievements/20.png", new AchConXWordsInRange(statistics, 20, 21)));
 		}
 		//boggle achievements
 		if(this.gametype == GameType.BOGGLE){

@@ -100,13 +100,11 @@ public class Statistics implements TimeListener{
     
     public int getCorrectUniqueAttemptsLastXSeconds(int seconds){
         int upToTime = timeLeft + seconds;
-        System.out.println("uptotime" + upToTime);
         int attempts = 0;
         //as long as not at beginning or time is not beyond period
         for(int i = data.size()-1; i>=0 && data.get(i).getTime() <= upToTime ;i--){
             if(data.get(i).isWordCorrect() && data.get(i).isNew()){
                 attempts++;
-                System.out.println(data.get(i).getTime());
             }
         }
         

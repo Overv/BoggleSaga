@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import Model.Settings.*;
+import Model.Achievements.*;
 import View.EndFrame;
 import View.GameFrame;
 import sun.audio.AudioPlayer;
@@ -32,7 +33,8 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
         
         this.gameView.setOnWordListener(this);
         this.gameView.setScore(0);
-        gameModel.setTimeListener(this);
+        gameModel.addTimeListener(this);
+        gameModel.addAchievementListener(gameView);
     }
 
     public void startGame(){

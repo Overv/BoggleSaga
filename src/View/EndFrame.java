@@ -1,6 +1,6 @@
 package View;
 
-import Model.Achievement;
+import Model.Achievements.Achievement;
 import Model.Game;
 import Model.Highscore;
 import Model.HighscoreEntry;

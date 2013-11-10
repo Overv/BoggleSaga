@@ -1,6 +1,8 @@
 package View;
 
 import Model.DiceCoord;
+import Model.Achievements.Achievement;
+import Model.Achievements.AchievementListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,7 +19,7 @@ import java.util.HashSet;
  * Date: 10/16/13
  * Time: 9:18 PM
  */
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements AchievementListener {
     
     private int gridWidth;
     private int gridHeight;
@@ -292,4 +294,18 @@ public class GameFrame extends JFrame {
     public interface OnWordListener {
         public void onWord(String word);
     }
+
+	@Override
+	public void showAchievement(ArrayList<Achievement> achievements) {
+		for(Achievement a : achievements){
+			JOptionPane.showMessageDialog(null, null, a.getName(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(a.getImage()));
+		}
+		
+	}
+
+	@Override
+	public void startHotstreak() {
+		JOptionPane.showMessageDialog(null, "Started hotstreak");
+		
+	}
 }

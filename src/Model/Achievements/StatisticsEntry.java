@@ -1,5 +1,6 @@
-package Model;
+package Model.Achievements;
 
+import Model.Settings;
 import Model.Settings.*;
 /**
  * Created with IntelliJ IDEA.

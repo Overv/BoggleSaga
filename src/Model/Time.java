@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,11 +16,12 @@ public class Time {
     private Timer secondsTimer;
     private int gameDuration = 60; // in seconds
     private int timeLeft;
-    private TimeListener timeListener;
+    private ArrayList<TimeListener> timeListeners;
     
     public Time() {
         timer = new Timer();
         secondsTimer = new Timer();
+        timeListeners = new ArrayList<TimeListener>();
     }
 
     public int getTimeLeft() {
@@ -42,8 +44,8 @@ public class Time {
 
     // Register an observer, the observer will get notified each second through the onTimePassed() callback 
     // to update the view's time display. When the time is up the timesUp() callback is fired.
-    public void setTimeListener(TimeListener listener) {
-        timeListener = listener;
+    public void addTimeListener(TimeListener listener) {
+        timeListeners.add(listener);
     }
 
     public interface TimeListener {
@@ -56,10 +58,8 @@ public class Time {
         public void run() {
             secondsTimer.cancel();
 
-            if(timeListener != null) {
-                timeListener.timesUp();
-            } else {
-                System.err.println("No listeners registered for time");
+            for(TimeListener listener : timeListeners){
+            	listener.timesUp();
             }
         }
     }
@@ -67,11 +67,10 @@ public class Time {
     // Inline class, specifies the callback used to notify the Observer when a specified time has passed
     class TimeLeft extends TimerTask {
         public void run() {
-            if(timeListener != null) {
-                timeListener.onTimePassed(timeLeft); // Send time left to the Observer every second
-            } else {
-                System.err.println("No listeners registered for time");
+        	for(TimeListener listener : timeListeners){
+            	listener.onTimePassed(timeLeft);
             }
+        	
             timeLeft -= 1; // each callback reduce timeleft by 1
         }
     }

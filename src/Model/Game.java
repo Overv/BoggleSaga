@@ -3,6 +3,12 @@ package Model;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import Model.Achievements.Achievement;
+import Model.Achievements.AchievementListener;
+import Model.Achievements.AchievementManager;
+import Model.Achievements.Statistics;
+import Model.Achievements.StatisticsEntry;
+
 /**
  * Created with IntelliJ IDEA.
  * User: roberto
@@ -21,6 +27,7 @@ public class Game {
     private Dictionary dictionary;
     private ArrayList<String> foundWords;
     private Statistics statistics;
+    private AchievementManager achievementManager;
 
     public Game(int boardSizeX, int boardSizeY) {
         this.score = new Score();
@@ -30,6 +37,8 @@ public class Game {
         this.foundWords = new ArrayList<String>();
         this.board = boardFactory.createBoard(boardSizeX, boardSizeY);
         this.statistics = new Statistics();
+        this.achievementManager = new AchievementManager(this.statistics, Settings.getGameType());
+        this.time.addTimeListener(achievementManager);
     }
     
     public void start() {
@@ -93,8 +102,8 @@ public class Game {
         return this.board.toString();
     }
     
-    public void setTimeListener(Time.TimeListener listener) {
-        this.time.setTimeListener(listener);
+    public void addTimeListener(Time.TimeListener listener) {
+        this.time.addTimeListener(listener);
     }
     
     public String getBestWord() {
@@ -109,16 +118,16 @@ public class Game {
     public void addStatisticsEntry(StatisticsEntry entry){
         statistics.addEntry(entry);
     }
+    
+    public void addAchievementListener(AchievementListener listener){
+    	achievementManager.addAchievementListener(listener);
+    }
 
     public ArrayList<Achievement> getAchievements(){
-        return statistics.getAchievements();
+        return achievementManager.getAchievements();
     }
 
     public void printStatistics(){
         statistics.print();
-    }
-
-    public void printAchievements(){
-        statistics.printAchievements();
     }
 }

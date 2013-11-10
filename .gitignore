@@ -4,3 +4,6 @@ workspace.xml
 .idea/*
 *.iml
 *.iws
+*.jar
+res/Resources/highscores.txt
+res/META-INF/*

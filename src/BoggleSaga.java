@@ -12,8 +12,6 @@ public class BoggleSaga {
         if (args.length == 1) {
             Board.setSeed(Integer.valueOf(args[0]));
         }
-
-        Board.setSeed(1337);
         
         // Load settings
         Settings.loadSettings();

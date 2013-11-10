@@ -44,8 +44,15 @@ public class GameFrame extends JFrame implements AchievementListener {
     
     private JLabel hotstreakLabel;
     private Timer hotstreakTimer;
+    
+    private JLabel achievementLabel;
+    private ArrayList<Achievement> achievementsLeft;
+    private Timer achievementTimer;
 
     public GameFrame(int gridWidth, int gridHeight) {        
+        // initialize achievementsLeft
+        achievementsLeft = new ArrayList<Achievement>();
+        
         // set the ammount of buttons and letters based on size
         diceButtons = new JButton[gridWidth][gridHeight];
         diceLetters = new char[gridWidth][gridHeight];
@@ -142,6 +149,12 @@ public class GameFrame extends JFrame implements AchievementListener {
         hotstreakLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
         hotstreakLabel.setFont(new Font("Arial", Font.BOLD, 20));
         hotstreakLabel.setForeground(Color.decode("#D72828"));
+        
+        achievementLabel = new JLabel();
+        achievementLabel.setAlignmentX(CENTER_ALIGNMENT);
+        achievementLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
+        achievementLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        achievementLabel.setForeground(Color.decode("#0074CC"));
 
         infoLabelContainer.add(timeCaptionLabel);
         infoLabelContainer.add(timeLabel);
@@ -150,6 +163,7 @@ public class GameFrame extends JFrame implements AchievementListener {
         infoLabelContainer.add(wordCaptionLabel);
         infoLabelContainer.add(wordPlaceholder);
         infoLabelContainer.add(wordListContainer);
+        infoLabelContainer.add(achievementLabel);
         infoLabelContainer.add(hotstreakLabel);
 
         add(infoLabelContainer, BorderLayout.LINE_START);
@@ -294,9 +308,10 @@ public class GameFrame extends JFrame implements AchievementListener {
 
         wordListModel.clear();
 
-        for (String word : words) {
+        //start at end to put last word first in list
+        for (int i = words.size()-1; i>=0; i--) {
             // Space for left padding improves layout
-            wordListModel.addElement(word.substring(0, 1).toUpperCase() + word.substring(1));
+            wordListModel.addElement(words.get(i).substring(0, 1).toUpperCase() + words.get(i).substring(1));
         }
     }
 
@@ -311,9 +326,13 @@ public class GameFrame extends JFrame implements AchievementListener {
 	@Override
 	public void showAchievement(ArrayList<Achievement> achievements) {
 		for(Achievement a : achievements){
-			JOptionPane.showMessageDialog(null, null, a.getName(), JOptionPane.INFORMATION_MESSAGE, new ImageIcon(a.getImage()));
+			achievementsLeft.add(a);
 		}
 		
+		if(achievementTimer == null){
+		    achievementTimer = new Timer();
+		    achievementTimer.scheduleAtFixedRate(new AchievementTask(), 0, 5000);
+		}
 	}
 
 	@Override
@@ -330,13 +349,35 @@ public class GameFrame extends JFrame implements AchievementListener {
         hotstreakLabel.setText("");
     }
     
+    class AchievementTask extends TimerTask{
+        public void run(){
+            if(!achievementsLeft.isEmpty()){
+                Achievement a = achievementsLeft.get(0);
+                achievementLabel.setIcon(new ImageIcon(a.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH)));
+                achievementLabel.setText(a.getName());
+                achievementsLeft.remove(a);
+            }
+            else{
+                achievementLabel.setIcon(null);
+                achievementLabel.setText("");
+                achievementTimer.cancel();
+                achievementTimer.purge();
+                achievementTimer = null;
+            }
+        }
+    }
+    
     class HotstreakTask extends TimerTask{
+        private boolean on;
+        
         public void run() {
-            if(hotstreakLabel.getForeground().equals(Color.decode("#D72828"))){
+            if(on){
                 hotstreakLabel.setForeground(Color.decode("#56A739"));
+                on = false;
             }
             else{
                 hotstreakLabel.setForeground(Color.decode("#D72828"));
+                on = true;
             }
             hotstreakLabel.repaint(0);
         }

@@ -6,15 +6,25 @@ import Model.Settings.GameType;
 import Model.Time.TimeListener;
 
 public class AchievementManager implements TimeListener {
-	private Statistics statistics;
+    private Statistics statistics;
 	private GameType gametype;
 	private ArrayList<AchievementListener> achievementListeners;
 	private ArrayList<Achievement> achievements;
 	
+	private int starttimeHotstreak;
+	private boolean inHotstreak;
+	private static final int HOTSTREAKLENGTH = 5;
+	private static final int HOTSTREAKCONDITIONLENGTH = 5;
+	private static final int HOTSTREAKCONDITIONWORDS = 2;
+	
 	public AchievementManager(Statistics statistics, GameType type) {
+	    
+	    
 		this.statistics = statistics;
 		this.gametype = type;
 		this.achievementListeners = new ArrayList<AchievementListener>();
+		this.starttimeHotstreak = -1;
+		this.inHotstreak = false;
 		
 		//Add achievements applicable to this gametype
 		achievements = new ArrayList<Achievement>();
@@ -72,7 +82,7 @@ public class AchievementManager implements TimeListener {
     
     //Set hotstreak condition here
     private boolean hotstreakConditionMet(){
-    	return statistics.getCorrectAttemptsLastXSeconds(5) >= 2;
+    	return statistics.getCorrectUniqueAttemptsLastXSeconds(HOTSTREAKCONDITIONLENGTH) >= HOTSTREAKCONDITIONWORDS;
     }
 
 	@Override
@@ -84,6 +94,11 @@ public class AchievementManager implements TimeListener {
             if(!a.isAchieved()){
                 a.calculate();
             }
+        }
+        
+        //stop hotstreak
+        for(AchievementListener listener : achievementListeners){
+            listener.stopHotstreak();
         }
 	}
 
@@ -99,14 +114,27 @@ public class AchievementManager implements TimeListener {
 			}
 		}
 		
+		//start hotstreak conditions
 		boolean enableHotstreak = hotstreakConditionMet();
+		if(enableHotstreak && !inHotstreak){
+		    starttimeHotstreak = timeLeft;
+		}
+		
+		//stop hotstreak conditions, at least HOTSTREAKLENGTH seconds have passed since start of hotstreak
+		boolean stopHotstreak = starttimeHotstreak - timeLeft > HOTSTREAKLENGTH && !enableHotstreak;
+		
 		
 		//call listeners
 		for(AchievementListener listener : achievementListeners){
 			listener.showAchievement(newAchievements);
 			
-			if(enableHotstreak){
+			if(enableHotstreak && !inHotstreak){
 				listener.startHotstreak();
+				inHotstreak = true;
+			}
+			else if(stopHotstreak && inHotstreak){
+			    listener.stopHotstreak();
+			    inHotstreak = false;
 			}
 		}
 		

@@ -59,7 +59,7 @@ public class GameController implements GameFrame.OnWordListener, Time.TimeListen
         boolean wordCorrect = gameModel.checkWord(word);
 
         //Record statistics about game
-        gameModel.addStatisticsEntry(new StatisticsEntry(timeLeft, word, wordCorrect, Settings.getGameType()));
+        gameModel.addStatisticsEntry(timeLeft, word, wordCorrect, Settings.getGameType());
 
         if(wordCorrect){
             gameModel.addWord(word);

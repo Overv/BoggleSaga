@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import Model.Settings.GameType;
 import Model.Achievements.Achievement;
 import Model.Achievements.AchievementListener;
 import Model.Achievements.AchievementManager;
@@ -37,6 +38,7 @@ public class Game {
         this.foundWords = new ArrayList<String>();
         this.board = boardFactory.createBoard(boardSizeX, boardSizeY);
         this.statistics = new Statistics();
+        this.addTimeListener(statistics);
         this.achievementManager = new AchievementManager(this.statistics, Settings.getGameType());
         this.time.addTimeListener(achievementManager);
     }
@@ -115,8 +117,8 @@ public class Game {
     }
 
     // Methods for Statistics access
-    public void addStatisticsEntry(StatisticsEntry entry){
-        statistics.addEntry(entry);
+    public void addStatisticsEntry(int timeLeft, String word, boolean wordCorrect, GameType type){
+        statistics.addEntry(new StatisticsEntry(timeLeft, word, wordCorrect, type, statistics.isNew(word)));
     }
     
     public void addAchievementListener(AchievementListener listener){

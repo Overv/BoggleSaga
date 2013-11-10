@@ -22,7 +22,7 @@ public class Statistics implements TimeListener{
     
 
     public Statistics(){
-    	timeLeft = 0;
+    	timeLeft = 99999;
     	
         data = new ArrayList<StatisticsEntry>();
         falseAttempts = 0;
@@ -62,11 +62,11 @@ public class Statistics implements TimeListener{
     }
     
     public int getAttemptsLastXSeconds(int seconds){
-        int upToTime = timeLeft - seconds;
+        int upToTime = timeLeft + seconds;
         
         int attempts = 0;
         //as long as not at beginning or time is not beyond period
-        for(int i = data.size()-1; i>=0 && data.get(i).getTime() >= upToTime ;i--){
+        for(int i = data.size()-1; i>=0 && data.get(i).getTime() <= upToTime ;i--){
             attempts++;
         }
         
@@ -74,11 +74,11 @@ public class Statistics implements TimeListener{
     }
     
     public int getFalseAttemptsLastXSeconds(int seconds){
-        int upToTime = timeLeft - seconds;
+        int upToTime = timeLeft + seconds;
         
         int attempts = 0;
         //as long as not at beginning or time is not beyond period
-        for(int i = data.size()-1; i>=0 && data.get(i).getTime() >= upToTime ;i--){
+        for(int i = data.size()-1; i>=0 && data.get(i).getTime() <= upToTime ;i--){
             if(!data.get(i).isWordCorrect())
                 attempts++;
         }
@@ -87,16 +87,39 @@ public class Statistics implements TimeListener{
     }
     
     public int getCorrectAttemptsLastXSeconds(int seconds){
-        int upToTime = timeLeft - seconds;
-        
+        int upToTime = timeLeft + seconds;
         int attempts = 0;
         //as long as not at beginning or time is not beyond period
-        for(int i = data.size()-1; i>=0 && data.get(i).getTime() >= upToTime ;i--){
+        for(int i = data.size()-1; i>=0 && data.get(i).getTime() <= upToTime ;i--){
             if(data.get(i).isWordCorrect())
                 attempts++;
         }
         
         return attempts;
+    }
+    
+    public int getCorrectUniqueAttemptsLastXSeconds(int seconds){
+        int upToTime = timeLeft + seconds;
+        System.out.println("uptotime" + upToTime);
+        int attempts = 0;
+        //as long as not at beginning or time is not beyond period
+        for(int i = data.size()-1; i>=0 && data.get(i).getTime() <= upToTime ;i--){
+            if(data.get(i).isWordCorrect() && data.get(i).isNew()){
+                attempts++;
+                System.out.println(data.get(i).getTime());
+            }
+        }
+        
+        return attempts;
+    }
+    
+    public boolean isNew(String word){
+        for(StatisticsEntry e : data){
+            if(e.getWord().equals(word)){
+                return false;
+            }
+        }
+        return true;
     }
 
 

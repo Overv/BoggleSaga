@@ -21,12 +21,14 @@ public class StatisticsEntry {
     private String word;
     private boolean wordCorrect;
     private GameType gametype;
+    private boolean isNew;
 
-    public StatisticsEntry(int time, String word, boolean wordCorrect, GameType gametype){
+    public StatisticsEntry(int time, String word, boolean wordCorrect, GameType gametype, boolean isNew){
         this.time = time;
         this.word = word;
         this.wordCorrect = wordCorrect;
         this.gametype = gametype;
+        this.isNew = isNew;
     }
 
     public int getTime(){
@@ -47,5 +49,9 @@ public class StatisticsEntry {
 
     public String toString(){
         return "StatisticsEntry - t: " + time + "  w: " + word + "  c: " + wordCorrect + "  g: " + gametype;
+    }
+    
+    public boolean isNew(){
+        return isNew;
     }
 }

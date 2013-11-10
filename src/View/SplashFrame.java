@@ -109,7 +109,7 @@ public class SplashFrame extends JFrame implements ActionListener {
         musicCheckbox.addActionListener(this);
         musicCheckbox.setAlignmentX(CENTER_ALIGNMENT);
         musicCheckbox.setFont(new Font(musicCheckbox.getFont().getFontName(), Font.BOLD, 14));
-        musicCheckbox.setBackground(Color.decode("#222222"));
+        musicCheckbox.setBackground(Color.decode("#1a1a1a"));
         musicCheckbox.setForeground(Color.WHITE);
         musicCheckbox.setBorder(new EmptyBorder(10, 92, 5, 93));
         musicCheckbox.setFocusPainted(false);
@@ -121,13 +121,14 @@ public class SplashFrame extends JFrame implements ActionListener {
         JPanel soundCheckboxContainer = new JPanel();
         soundCheckboxContainer.setLayout(new BoxLayout(soundCheckboxContainer, BoxLayout.PAGE_AXIS));
         soundCheckboxContainer.setBorder(new EmptyBorder(0, 0, 0, 0));
+        soundCheckboxContainer.setBackground(Color.decode("#1a1a1a"));
 
         soundCheckbox = new JCheckBox("Sound");
         soundCheckbox.setSelected(Settings.isSoundEnabled());
         soundCheckbox.addActionListener(this);
         soundCheckbox.setAlignmentX(CENTER_ALIGNMENT);
         soundCheckbox.setFont(new Font(soundCheckbox.getFont().getFontName(), Font.BOLD, 14));
-        soundCheckbox.setBackground(Color.decode("#222222"));
+        soundCheckbox.setBackground(Color.decode("#1a1a1a"));
         soundCheckbox.setForeground(Color.WHITE);
         soundCheckbox.setBorder(new EmptyBorder(5, 90, 10, 90));
         soundCheckbox.setFocusPainted(false);

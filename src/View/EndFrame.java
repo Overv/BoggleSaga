@@ -10,13 +10,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Overv
- * Date: 28-10-13
- * Time: 1:10
- * To change this template use File | Settings | File Templates.
- */
 public class EndFrame extends JFrame {
     public EndFrame(Game game) {
         // Initialize window properties
@@ -63,7 +56,7 @@ public class EndFrame extends JFrame {
         JLabel wordCaptionLabel = new JLabel("All words");
         wordCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         wordCaptionLabel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        wordCaptionLabel.setFont(new Font(wordCaptionLabel.getFont().getFontName(), Font.PLAIN, 20));
+        wordCaptionLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         wordCaptionLabel.setForeground(Color.decode("#eeeeee"));
 
         DefaultListModel<String> wordListModel = new DefaultListModel<String>();
@@ -133,7 +126,7 @@ public class EndFrame extends JFrame {
         JLabel achievementCaptionLabel = new JLabel("Achievements");
         achievementCaptionLabel.setAlignmentX(CENTER_ALIGNMENT);
         achievementCaptionLabel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        achievementCaptionLabel.setFont(new Font(achievementCaptionLabel.getFont().getFontName(), Font.PLAIN, 20));
+        achievementCaptionLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         achievementCaptionLabel.setForeground(Color.decode("#eeeeee"));
 
         DefaultListModel<String> achievementListModel = new DefaultListModel<String>();

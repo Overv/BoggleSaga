@@ -1,7 +1,5 @@
 package Model;
 
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.Media;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 

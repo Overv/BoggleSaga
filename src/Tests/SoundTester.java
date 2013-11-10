@@ -1,7 +1,6 @@
 package Tests;
 
 import Model.Sound;
-import javafx.application.Application;
 import org.junit.Test;
 
 /**

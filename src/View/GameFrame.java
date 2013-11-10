@@ -3,6 +3,7 @@ package View;
 import Model.DiceCoord;
 import Model.Achievements.Achievement;
 import Model.Achievements.AchievementListener;
+import Model.Time.TimeListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.TimerTask;
+import java.util.Timer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,8 +41,11 @@ public class GameFrame extends JFrame implements AchievementListener {
     private Color defaultTextColor;
 
     private OnWordListener onWordListener;
+    
+    private JLabel hotstreakLabel;
+    private Timer hotstreakTimer;
 
-    public GameFrame(int gridWidth, int gridHeight) {
+    public GameFrame(int gridWidth, int gridHeight) {        
         // set the ammount of buttons and letters based on size
         diceButtons = new JButton[gridWidth][gridHeight];
         diceLetters = new char[gridWidth][gridHeight];
@@ -130,6 +136,12 @@ public class GameFrame extends JFrame implements AchievementListener {
         wordListContainer.setBackground(Color.decode("#111111"));
 
         wordListContainer.add(wordListScroller);
+        
+        hotstreakLabel = new JLabel();
+        hotstreakLabel.setAlignmentX(CENTER_ALIGNMENT);
+        hotstreakLabel.setBorder(new EmptyBorder(5, 20, 10, 20));
+        hotstreakLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        hotstreakLabel.setForeground(Color.decode("#D72828"));
 
         infoLabelContainer.add(timeCaptionLabel);
         infoLabelContainer.add(timeLabel);
@@ -138,6 +150,7 @@ public class GameFrame extends JFrame implements AchievementListener {
         infoLabelContainer.add(wordCaptionLabel);
         infoLabelContainer.add(wordPlaceholder);
         infoLabelContainer.add(wordListContainer);
+        infoLabelContainer.add(hotstreakLabel);
 
         add(infoLabelContainer, BorderLayout.LINE_START);
 
@@ -150,7 +163,7 @@ public class GameFrame extends JFrame implements AchievementListener {
         diceGridContainer.setLayout(gridLayout);
         diceGridContainer.setBorder(new EmptyBorder(30, 30, 30, 30));
         diceGridContainer.setBackground(Color.decode("#0074CC"));
-
+        
         // Create button for each dice
         for (int y = 0; y < gridWidth; y++) {
             for (int x = 0; x < gridHeight; x++) {
@@ -305,9 +318,27 @@ public class GameFrame extends JFrame implements AchievementListener {
 
 	@Override
 	public void startHotstreak() {
+	    hotstreakTimer = new Timer();
+	    hotstreakTimer.scheduleAtFixedRate(new HotstreakTask(), 0, 150);
+	    hotstreakLabel.setText("HOTSTREAK");
 	}
 
     @Override
     public void stopHotstreak() {
+        hotstreakTimer.cancel();
+        hotstreakTimer.purge();
+        hotstreakLabel.setText("");
+    }
+    
+    class HotstreakTask extends TimerTask{
+        public void run() {
+            if(hotstreakLabel.getForeground().equals(Color.decode("#D72828"))){
+                hotstreakLabel.setForeground(Color.decode("#56A739"));
+            }
+            else{
+                hotstreakLabel.setForeground(Color.decode("#D72828"));
+            }
+            hotstreakLabel.repaint(0);
+        }
     }
 }

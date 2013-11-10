@@ -12,15 +12,21 @@ import java.util.Random;
  */
 public abstract class Board {
 
+    private static Integer seed;
+
     Random rand;
     
     protected int boardSizeX;
     protected int boardSizeY;
     protected int boardSize;
     protected char[][] board;
+
+    public static void setSeed(int seed) {
+        Board.seed = seed;
+    }
     
     public Board(int boardSizeX, int boardSizeY) {
-        this.rand = new Random();
+        this.rand = seed == null ? new Random() : new Random(seed);
         
         this.boardSizeX = boardSizeX;
         this.boardSizeY = boardSizeY;
@@ -43,7 +49,7 @@ public abstract class Board {
     // Generates a board, independent of the size of the board
     public void generateBoard(String[] dice) {
         // shuffle dice
-        String[] shuffled4x4 = shuffleArray(dice);
+        String[] shuffled4x4 = shuffleArray(rand, dice);
         // fill the board with the generated letters
         int counter = 0;
         for(int i=0; i<boardSizeX; i++) {
@@ -124,11 +130,10 @@ public abstract class Board {
     // Collections.shuffle function, it only shuffles lists. If we would have to convert 
     // the array to a list and back, this takes more time then doing it this way. 
     // The shuffle algorithm is taken from Stack Overflow: http://tinyurl.com/onake63
-    protected static String[] shuffleArray(String[] arIn) {
+    protected static String[] shuffleArray(Random rand, String[] arIn) {
         String[] ar = arIn;
-        Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
+            int index = rand.nextInt(i + 1);
             // Simple swap
             String a = ar[index];
             ar[index] = ar[i];

@@ -114,11 +114,7 @@ public class GameFrame extends JFrame {
         wordList.setLayoutOrientation(JList.VERTICAL);
         wordList.setVisibleRowCount(-1);
         wordList.setFont(new Font("Arial", Font.BOLD, 16));
-        wordList.setCellRenderer(new DefaultListCellRenderer(){
-            public int getHorizontalAlignment() {
-                return CENTER;
-            }
-        });
+        wordList.setCellRenderer(new NoSelectListRenderer());
         wordList.setBackground(Color.decode("#111111"));
         wordList.setForeground(Color.decode("#F4B701"));
 

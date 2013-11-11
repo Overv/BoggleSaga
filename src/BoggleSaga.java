@@ -17,7 +17,7 @@ public class BoggleSaga {
         Settings.loadSettings();
 
         // Show splash screen
-        SplashFrame splashFrame = new SplashFrame();
+        SplashFrame splashFrame = SplashFrame.instance();
 
         // Add callback to start main game
         splashFrame.setOnStartGameListener(new SplashFrame.OnStartGameListener() {

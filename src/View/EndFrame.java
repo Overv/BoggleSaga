@@ -8,22 +8,26 @@ import Model.HighscoreEntry;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
-public class EndFrame extends JFrame {
+public class EndFrame extends JFrame implements WindowListener{
     public EndFrame(Game game) {
         // Initialize window properties
         setSize(650, 500);
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Boggle Saga Inc.");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         // Create layout
         createLayout(game);
 
         // Show window
         setVisible(true);
+        this.addWindowListener(this);
+        
     }
 
     private void createLayout(Game game) {
@@ -160,5 +164,35 @@ public class EndFrame extends JFrame {
 
         // Add lists to window
         add(gridContainer, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void windowActivated(WindowEvent arg0) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent arg0) {    
+    }
+
+    @Override
+    public void windowClosing(WindowEvent arg0) {
+        SplashFrame.instance().setVisible(true);
+        dispose();
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent arg0) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent arg0) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent arg0) {
+    }
+
+    @Override
+    public void windowOpened(WindowEvent arg0) {
     }
 }

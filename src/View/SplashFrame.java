@@ -1,5 +1,6 @@
 package View;
 
+import Controller.GameController;
 import Model.Settings;
 import com.sun.corba.se.impl.orb.ORBVersionImpl;
 
@@ -15,7 +16,18 @@ public class SplashFrame extends JFrame implements ActionListener {
 
     private OnStartGameListener listener;
 
-    public SplashFrame() {
+    //Singleton
+    private static SplashFrame unique;
+    
+    public static SplashFrame instance(){
+        if(unique == null){
+            unique = new SplashFrame();
+        }
+        
+        return unique;
+    }
+    
+    private SplashFrame() {
         // Initialize window properties
         setResizable(false);
         setTitle("Boggle Saga Inc.");
@@ -145,7 +157,6 @@ public class SplashFrame extends JFrame implements ActionListener {
             Settings.setGametype(source == boggleButton ? Settings.GameType.BOGGLE : Settings.GameType.BIGBOGGLE);
 
             setVisible(false);
-            dispose();
 
             listener.onStart();
         }

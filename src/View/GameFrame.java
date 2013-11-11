@@ -53,6 +53,8 @@ public class GameFrame extends JFrame implements AchievementListener {
     public GameFrame(int gridWidth, int gridHeight) {        
         // initialize achievementsLeft
         achievementsLeft = new ArrayList<Achievement>();
+        hotstreakTimer = new Timer();
+        achievementTimer = new Timer();
         
         // set the ammount of buttons and letters based on size
         diceButtons = new JButton[gridWidth][gridHeight];
